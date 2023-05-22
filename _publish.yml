@@ -1,0 +1,4 @@
+- source: project
+  quarto-pub:
+    - id: 432fd48b-6df9-4c2e-a6d1-601e7db86a71
+      url: 'https://azielben.quarto.pub/system-dynamics'

@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>System Dynamics - 3&nbsp; Our Second Order of Business</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./2_tfo.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./3_osoob.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Our Second Order of Business</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">System Dynamics</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Patch Notes/Detritus</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1_cmo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Course Motivation and Overview</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2_tfo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The First Order</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3_osoob.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Our Second Order of Business</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
+  <li><a href="#mass-and-spring" id="toc-mass-and-spring" class="nav-link" data-scroll-target="#mass-and-spring"><span class="header-section-number">3.1</span> Mass and Spring</a></li>
+  <li><a href="#a-quick-dive-into-complex-analysis" id="toc-a-quick-dive-into-complex-analysis" class="nav-link" data-scroll-target="#a-quick-dive-into-complex-analysis"><span class="header-section-number">3.2</span> A Quick Dive into Complex Analysis</a></li>
+  <li><a href="#damping" id="toc-damping" class="nav-link" data-scroll-target="#damping"><span class="header-section-number">3.3</span> Damping!</a></li>
+  <li><a href="#pole-plots" id="toc-pole-plots" class="nav-link" data-scroll-target="#pole-plots"><span class="header-section-number">3.4</span> Pole Plots</a></li>
+  <li><a href="#leveraging-the-discriminant" id="toc-leveraging-the-discriminant" class="nav-link" data-scroll-target="#leveraging-the-discriminant"><span class="header-section-number">3.5</span> Leveraging the Discriminant</a></li>
+  <li><a href="#the-tank-revisited-inertia" id="toc-the-tank-revisited-inertia" class="nav-link" data-scroll-target="#the-tank-revisited-inertia"><span class="header-section-number">3.6</span> The Tank, Revisited (Inertia)</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Our Second Order of Business</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="preface" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="preface">Preface</h2>
+<p>First order systems are honestly pretty boring. When we put in a step input, we just get a pure exponential. We won’t be able to get more interesting behavior, like oscillation, because that’s just mathematically impossible.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Second order systems, on the other hand, <em>can</em> oscillate by themselves. Try to convince yourself of this mathematically just based on what oscillation is.</p>
+<p>Mass-spring systems are pretty good models of everything in the world (as long as you use enough mass-spring systems). They’re really nice because having a good understanding of ONE mass-spring system provides us with the intuition for more complicated systems.</p>
+</section>
+<section id="mass-and-spring" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="mass-and-spring"><span class="header-section-number">3.1</span> Mass and Spring</h2>
+<p>Say we have a mass-spring system where a mass <span class="math inline">\(m\)</span> is attached to a wall with a spring <span class="math inline">\(k\)</span> and a damper <span class="math inline">\(b\)</span>. Gravity isn’t “turned on”, so if you want to visualize the system, that mass is floating. The equation of motion for a positive displacement <span class="math inline">\(q\)</span> is:<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p><span class="math display">\[m\ddot{q} = -kq - b\dot{q}\]</span></p>
+<p>Or in its more familiar form:</p>
+<p><span class="math display">\[m\ddot{q} + b\dot{q} + kq = 0\]</span></p>
+<p>This is the famed mass-spring equation. Say we have an input - a force <span class="math inline">\(u\)</span> acting on the mass in the positive direction. Now our equation of motion is:</p>
+<p><span class="math display">\[m\ddot{q} + b\dot{q} + kq = u\]</span></p>
+<p>This is a linear differential equation, so we’ll solve this by plugging in an educated guess. Let’s try <span class="math inline">\(q(t) = Ae^{st}\)</span>, because differentiating this function <span class="math inline">\(n\)</span> times just multiplies it by <span class="math inline">\(s^n\)</span>.</p>
+<p>First, we’ll solve the homogeneous equation, or the case where <span class="math inline">\(u=0\)</span>.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p><span class="math display">\[m\ddot{q} + b\dot{q} + kq = 0\]</span> <span class="math display">\[ms^2 Ae^{st} + bs Ae^{st} + kAe^{st} = 0\]</span> <span class="math display">\[ms^2 + bs + k = 0\]</span></p>
+<p>This is known as the characteristic (or auxiliary) equation. We can now use algebra to solve for the roots of the equation, or by proxy, the solution of the differential equation.</p>
+<p><span class="math display">\[s_{1, 2} = \frac{-b \pm \sqrt{b^2 - 4mk}}{2m}\]</span></p>
+<p>These are also called the <strong>poles</strong> of the system, but we’re getting ahead of ourselves. Let’s simplify further.</p>
+<p><span class="math display">\[s_{1, 2} = \frac{-b \pm \sqrt{b^2 - 4mk}}{2m} = -\frac{b}{2m} \pm \sqrt{\frac{b^2 - 4mk}{4m^2}} = -\frac{b}{2m} \pm \sqrt{\left(\frac{b}{2m} \right)^2 - \frac{k}{m}}\]</span></p>
+<p>We define the <strong>natural frequency</strong> <span class="math inline">\(\omega_n = \sqrt{\frac{k}{m}}\)</span> and the <strong>damping ratio</strong> <span class="math inline">\(\zeta = \frac{b}{2m\omega_n}\)</span>. Using these definitions, we can reorganize the mass-spring equation in terms of these variables.</p>
+<p><span class="math display">\[m\ddot{q} + b\dot{q} + kq = 0 \qquad \to \qquad \ddot{q} + 2\zeta\omega_n \dot{q} + \omega_n^2 q = 0\]</span></p>
+<p>And the poles of this equation are:</p>
+<p><span class="math display">\[s_{1, 2} = -\zeta \omega_n \pm \omega_n \sqrt{\zeta^2 - 1}\]</span></p>
+</section>
+<section id="a-quick-dive-into-complex-analysis" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="a-quick-dive-into-complex-analysis"><span class="header-section-number">3.2</span> A Quick Dive into Complex Analysis</h2>
+<p>Complex analysis is the study of functions of a complex variable <span class="math inline">\(z\)</span>, where <span class="math inline">\(z\)</span> has a real component <span class="math inline">\(a\)</span> and an imaginary component <span class="math inline">\(b\)</span>. Complex numbers show up all the time in this course, whenever anything oscillates, really (like mass-spring systems or pendulums).</p>
+<p>To take our first plunge into complex analysis, we need to define the <strong>imaginary unit</strong> <span class="math inline">\(i\)</span>.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> For now, let’s define <span class="math inline">\(i\)</span> as one of the two solutions to the quadratic equation <span class="math inline">\(x^2 = -1\)</span>. (The other is <span class="math inline">\(-i\)</span>, of course.) This is really special, because now we can describe the solutions of ALL polynomials<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> as the sum of a real number <span class="math inline">\(a\)</span> and another real number <span class="math inline">\(b\)</span> multiplied by the imaginary unit <span class="math inline">\(i\)</span>.</p>
+<p>Let’s conjure up a graphical representation of these numbers using Cartesian coordinates, where we define one axis as “real” and the other as “imaginary”. We’ll call this the complex plane. An arbitrary point <span class="math inline">\(z = a+ ib\)</span> is plotted below.</p>
+<p>We can also interpret these numbers in the context of polar coordinates, where <span class="math inline">\(\theta\)</span> is the angle between the vector from the origin to <span class="math inline">\(z\)</span> and the real axis, and <span class="math inline">\(r\)</span> is the magnitude of the aforementioned vector. It’s not difficult to translate between Cartesian coordinates and polar coordinates, but I’ll dump the formulas here anyway.</p>
+<p><span class="math display">\[a = r \cos{\theta} \qquad b = r \sin{\theta} \qquad r = \sqrt{a^2 + b^2} \qquad \theta = \arctan\left({\frac{b}{a}}\right)\]</span></p>
+<p>It’d be criminal to not mention Euler’s formula, which posits that: <a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<p><span class="math display">\[e^{i\theta} = \cos{\theta} + i \sin{\theta}\]</span></p>
+<p>A lot of the nuance of complex numbers is best understood by analyzing this <strong>complex exponential</strong>, especially because:</p>
+<p><span class="math display">\[z = a+ib = r\cos{\theta} + ir \sin{\theta} = r (\cos{\theta} + i \sin{\theta}) = re^{i\theta}\]</span></p>
+</section>
+<section id="damping" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="damping"><span class="header-section-number">3.3</span> Damping!</h2>
+<p>When <span class="math inline">\(\zeta = 0\)</span> (or the system is <strong>undamped</strong>), we have the poles <span class="math inline">\(s_{1, 2} = \pm i\omega_n\)</span>. This implies that our solution is a linear combination of sines and cosines, endlessly oscillating, forever and ever. (That’s kind of depressing to be honest.)</p>
+<blockquote class="blockquote">
+<p>What next? Euler guy.</p>
+<p>Prof.&nbsp;Luchtenburg</p>
+</blockquote>
+<p><span class="math display">\[x(t) = A_1 e^{i\omega_n t} + A_2 e^{- i \omega_n t} = A_1 (\cos(\omega_n t) + i \sin(\omega_n t)) + A_2 (\cos(\omega_n t) - i \sin(\omega_n t))\]</span> <span class="math display">\[= (A_1 + A_2) \cos(\omega_n t) + i(A_1 - A_2) \sin(\omega_n t) = C_1 \cos(\omega_n t) + C_2 \sin(\omega_n t)\]</span></p>
+<p>This reasoning carries over if we pick a damping ratio <span class="math inline">\(\zeta\)</span> between 0 and 1 (or the system is <strong>underdamped</strong>). The poles are:</p>
+<p><span class="math display">\[s_{1, 2} = -\zeta \omega_n \pm \sqrt{\omega_n^2 (\zeta^2 - 1)} = -\zeta \omega_n \pm i \omega_n \sqrt{1 - \zeta^2} = \sigma \pm i \omega_d\]</span></p>
+<p>We define the <strong>damped frequency</strong> <span class="math inline">\(\omega_d = \omega_n \sqrt{1-\zeta^2}\)</span>. (In practice, <span class="math inline">\(\omega_d \approx \omega_n\)</span>, because <span class="math inline">\(\zeta \ll 1\)</span>.) Additionally, we define <span class="math inline">\(\sigma = \zeta\omega_n\)</span> (for some reason). After substituting these new variables in, our solution becomes:</p>
+<p><span class="math display">\[x(t) = A_1 e^{(-\sigma + i\omega_d) t} + A_2 e^{(-\sigma - i\omega_d) t} = e^{-\sigma t} (C_1 \cos(\omega_n t) + C_2 \sin(\omega_n t))\]</span></p>
+<p>In the lattermost form, it’s obvious that <span class="math inline">\(\sigma\)</span> in fact have a use other than bookkeeping; it defines the exponential <strong>envelope</strong> by which the oscillation decays. An envelope is a function that outlines how a function grows/decays (it’s the red dashed line in the figure below).</p>
+<p>Notably, the time constant <span class="math inline">\(\tau\)</span> of the envelope is equal to <span class="math inline">\(1/\sigma\)</span>. Thus, we can eyeball the value of <span class="math inline">\(\sigma\)</span> based on how we’d find the time constant (the value <span class="math inline">\(63\%\)</span> less than the <span class="math inline">\(y\)</span>-intercept of the envelope). <span class="math display">\[x(t) = e^{-\sigma t} \sin(\omega_d t + \varphi)\]</span></p>
+<p>Most mechanical systems tend to have a very low damping ratio (<span class="math inline">\(\zeta \simeq O(0.1)\)</span>)<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>, and as mentioned before, a good rule of thumb is that <span class="math inline">\(\omega_n = \omega_d\)</span>.</p>
+<p>When we apply some initial conditions (like <span class="math inline">\(q(0) = q_0\)</span> and <span class="math inline">\(\dot{q}(0) = v_0\)</span>), our solution becomes:</p>
+<p><span class="math display">\[q(t) = e^{\sigma t} \left(q_0 \cos(\omega_d t) + \frac{\sigma q_0 + v_0}{\omega_d} \sin(\omega_d t)\right)\]</span></p>
+<p>When <span class="math inline">\(\zeta = 1\)</span>, or the system is <strong>critically damped</strong>, the poles are:</p>
+<p><span class="math display">\[s_{1, 2} = -\zeta \omega_n\]</span></p>
+<p>We use a trick from differential equations to fake another linearly independent solution, just chuck on an extra <span class="math inline">\(t\)</span>.</p>
+<p><span class="math display">\[q(t) = A_1 e^{-\zeta \omega_n t} + A_2 t e^{-\zeta \omega_n t}\]</span></p>
+<p>This doesn’t really happen in the real world, but it’s nice to cover all our bases. How about when <span class="math inline">\(\zeta &gt; 1\)</span>? We call this case <strong>overdamped</strong>, because our poles are:</p>
+<p><span class="math display">\[s_{1, 2} = -\zeta \omega_n \pm \omega_n \sqrt{\zeta^2 - 1}\]</span></p>
+<p>Both poles are negative here! Our solution is:</p>
+<p><span class="math display">\[q(t) = A_1 e^{s_1 t} + A_2 e^{s_2 t}\]</span></p>
+</section>
+<section id="pole-plots" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="pole-plots"><span class="header-section-number">3.4</span> Pole Plots</h2>
+<p>I’ve been emphasizing poles a lot in the last few pages, but why? What’s the importance of these seemingly arbitrary values? In fact, we can infer the dynamics of a system based on its poles.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
+<p>To analyze poles, we use a graphical tool called a <strong>pole plot</strong>, the plot of the roots of the characteristic equation on the complex plane. Let’s go down the list:</p>
+<ul>
+<li>When both poles are on the imaginary axis, the system is undamped.</li>
+<li>When both poles are off the real axis, the system oscillates. If they’re to the left of the imaginary axis, it’ll decay exponentially (underdamped), and if they’re to the right of the imaginary axis, it’ll grow exponentially.</li>
+<li>If both poles are on the real axis to the left of the imaginary axis, it’s overdamped.</li>
+<li>Rule of thumb: if there is ANY pole to the right of the imaginary axis, the response blows up.</li>
+</ul>
+<p>Here’s a nice chart from FPE. Complex conjugates are omitted for simplicity.</p>
+</section>
+<section id="leveraging-the-discriminant" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="leveraging-the-discriminant"><span class="header-section-number">3.5</span> Leveraging the Discriminant</h2>
+<p>I’m going to stray off from Prof.&nbsp;Luchtenburg for a second because <em>I</em> think this is useful.</p>
+<p>Suppose we want to identify the dampedness of a system based on the equation of motion rather than solving for <span class="math inline">\(\zeta\)</span>. We can do exactly this using the <strong>discriminant</strong> of the characteristic equation of the system. Let’s take a look at the canonical mass-spring system with a damper once again.</p>
+<p>The equation of motion, assuming free motion, is: <span class="math display">\[m\ddot{q} + b \dot{q} + k q = 0\]</span></p>
+<p>The characteristic equation is derived after plugging in <span class="math inline">\(q = e^{st}\)</span>. <span class="math display">\[ms^2 + bs + k = 0\]</span></p>
+<p>As stated in the section on damping, there are three forms of the general solution if there is damping present: both poles are real and distinct (the system is overdamped), both poles are real and equal (the system is critically damped), or both poles are complex conjugates (the system is underdamped). You may recall from Algebra that the discriminant of a polynomial can reveal some properties of the roots without actually computing them. The discriminant of a quadratic is defined as follows: <span class="math display">\[\text{Disc}(ax^2 + bx + c) = b^2-4ac\]</span></p>
+<p>This is the argument of the square root in the quadratic formula. If this expression is positive, the solutions to the quadratic are real and distinct. If this expression is 0, then there is only one real solution to the quadratic. If this expression is negative, the solutions to the quadratic are complex. So physically, finding the discriminant of the characteristic equation of the mass-spring system will tell us how damped it is. <span class="math display">\[\text{Disc}(ms^2 + bs + k) = b^2-4mk\]</span></p>
+<p><span class="math display">\[\begin{align*}
+    b^2 - 4mk &gt; 0 \quad &amp;\to \quad \text{overdamped} \\
+    b^2 - 4mk = 0 \quad &amp;\to \quad \text{critically damped} \\
+    b^2 - 4mk &lt; 0 \quad &amp;\to \quad \text{underdamped} \\
+\end{align*}\]</span></p>
+<p>And of course, if <span class="math inline">\(b=0\)</span>, then the system is undamped.</p>
+</section>
+<section id="the-tank-revisited-inertia" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="the-tank-revisited-inertia"><span class="header-section-number">3.6</span> The Tank, Revisited (Inertia)</h2>
+<p>Let’s revisit the tank from our study of first order systems. However, we’ll make one small change: the outflow pipe now has a defined length of <span class="math inline">\(L_p\)</span>.</p>
+<p>Let’s model the same way we’ve been doing thus far. First, a conservation law:</p>
+<p><span class="math display">\[\dot{V} = -Q\]</span></p>
+<p>Next, “Ohm’s law”:</p>
+<p><span class="math display">\[Q = \frac{\Delta P}{R} = \frac{P - P_\text{atm}}{R}\]</span></p>
+<p>If we isolate a piece of the pipe (with length <span class="math inline">\(L_p\)</span>) as shown below, we can demystify this system a bit.</p>
+<p>Assuming the cross-sectional area of the pipe <span class="math inline">\(A_p\)</span> is constant, the pressure force <span class="math inline">\(F_p = A_p \Delta P\)</span> accelerates the fluid between the two ends of this pipe. Additionally, there is friction <span class="math inline">\(F_f = -QRA_p\)</span> on the liquid caused by the resistance of the pipe. By leveraging Newton’s second law of motion, we now have a relationship between the pressure difference <span class="math inline">\(\Delta P\)</span> and the velocity of the water <span class="math inline">\(v\)</span>.</p>
+<p><span class="math display">\[m \frac{dv}{dt} = F_p + F_f = A_p \Delta P - Q R A_p\]</span></p>
+<p>The mass <span class="math inline">\(m\)</span> of the fluid between the two ends of this pipe is equal to the product of the density of the fluid <span class="math inline">\(\rho\)</span> and the volume between the two ends <span class="math inline">\(V_p\)</span>. (Notably, the volume <span class="math inline">\(V_p = A_p L_p\)</span>.)</p>
+<p><span class="math display">\[\rho \, V_p \, \frac{dv}{dt} = \rho A_p L_p \, \frac{dv}{dt} = A_p \Delta P - RQ A_p\]</span></p>
+<p>Because the product of the cross-sectional area <span class="math inline">\(A_p\)</span> and the fluid velocity <span class="math inline">\(v\)</span> is equal to the volumetric flow rate <span class="math inline">\(Q\)</span>, we can rewrite this equation as follows:</p>
+<p><span class="math display">\[\frac{\rho L_p}{A_p} \, \frac{dQ}{dt} = \Delta P - RQ\]</span></p>
+<p>Ok, we can shed some light on what we’re doing now. We define <strong>inductance</strong> (also referred to as <strong>liquid-flow inertance</strong> or <strong>inertia</strong>) as a term that describes the change in potential required for a unit rate of fluid flow. Inductance is the tendency of the fluid to move; it’s created by the inertia of water flowing through the pipe. The mathematical definition of inductance is as follows:</p>
+<p><span class="math display">\[L = \frac{\rho L_p}{A_p}\]</span></p>
+<p>Note that this definition of inductance is only valid for flow systems, but analogous concepts occur in other fields (like inductors from circuit analysis)! Fluid components that have an inductance are analogous to these inductors, or mechanical components with inertia.</p>
+<p>Let’s wrap up this example. When we plug in the definition of <span class="math inline">\(L\)</span> into our equation, a simple first order system rears its head.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></p>
+<p><span class="math display">\[L \, \frac{dQ}{dt} + RQ = \Delta P\]</span></p>
+<p>Let’s throw it into canonical form so we can see its time constant.</p>
+<p><span class="math display">\[\left(\frac{L}{R}\right) \dot{Q} + Q = \frac{\Delta P}{R} \qquad \qquad \tau = \frac{L}{R}\]</span></p>
+<p>To summarize, we’ve added a new tool to our arsenal: conservation of momentum (or Newton’s second law).</p>
+<p><span class="math display">\[\Delta P = L \dot{Q} + RQ\]</span> <span class="math display">\[\dot{V} = -Q\]</span> <span class="math display">\[C \Delta P = V\]</span></p>
+<p>By combining these three equations, we can use tools from our studies of mass-spring systems to analyze… well… any second order system.</p>
+<p><span class="math display">\[L \Delta \ddot{P} + R \Delta \dot{P} + \frac{1}{C} \Delta P = 0 \qquad \to \qquad \Delta \ddot{P} + \left(\frac{R}{L}\right) \Delta \dot{P} + \left(\frac{1}{LC}\right) \Delta P = 0\]</span> <span class="math display">\[m \ddot{q} + b \dot{q} + k q = 0 \qquad \to \qquad \ddot{q} + \left(\frac{b}{m}\right) \dot{q} + \left(\frac{k}{m}\right) q = 0\]</span></p>
+<p>We simply retrofit the definitions of the natural frequency <span class="math inline">\(\omega_n\)</span> and damping ratio <span class="math inline">\(\zeta\)</span> based on how we defined them for mass-spring systems to determine how the oscillations behave. Here’s a quick example using the flow system analogy we’ve been using thus far: <span class="math display">\[\qquad \ddot{q} + 2\zeta\omega_n \dot{q} + \omega_n^2 q = 0 \quad \longleftrightarrow \quad  \Delta \ddot{P} + \left(\frac{R}{L}\right) \Delta \dot{P} + \left(\frac{1}{LC}\right) \Delta P = 0\]</span></p>
+<p><span class="math display">\[\begin{align*}
+    2 \zeta \omega_n = \frac{R}{L} \qquad &amp;\longrightarrow \qquad \zeta = \frac{R}{2L \omega_n} = \frac{R\sqrt{LC}}{2L} = \frac{R}{2} \sqrt{\frac{C}{L}}\\
+    \omega_n^2 = \frac{1}{LC} \qquad &amp;\longrightarrow \qquad \omega_n = \frac{1}{\sqrt{LC}} = \frac{\sqrt{LC}}{LC}
+\end{align*}\]</span></p>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Prove it!<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Prof.&nbsp;Luchtenburg went off on a tangent about Hooke being a genius for realizing that spring motion is linear near the origin here. That was pretty funny.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>If you’re curious why we do this, you can read up on it in a linear algebra textbook. Think it’s theorem 3.9 in Friedberg’s Linear Algebra.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>You’ll see people, especially electrical engineers, use <span class="math inline">\(j\)</span> instead, because <span class="math inline">\(i\)</span> is commonly used for current. We’re better than them.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Regardless if its coefficients are real or complex!<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>You can prove this using the Taylor series representation of <span class="math inline">\(e^{x}\)</span>. You should do it, it’s <em>very</em> rewarding<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>Related rates of growth from Ma111, or big-O notation if you’ve taken ECE264.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>This is the crux of a lot we do in ME351. If any of you remember what an eigenvalue is from Ma110, that’ll come in handy in a bit.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>The analog of this system in circuit analysis is called the RL circuit, which is often used as a passive filter.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./2_tfo.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The First Order</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

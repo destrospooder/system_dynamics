@@ -1,0 +1,25 @@
+# General Information {-}
+
+This is a living document created from markdown and executable code.. Feel free to reach out if you find typos or have suggestions. It's a passion project though, so my response time may vary.
+
+**My Email:** benjamin.aziel@cooper.edu
+
+**Course Description:**
+An introductory course to the mathematical modeling of systems. Topics include mechanical elements and systems, electric circuits and analogous systems, fluid elements and systems, analysis of systems using transfer functions, state space equations, analog simulation and digital simulation. Also covered are block diagrams, Laplace transforms, and linear system analysis. Computer projects will be assigned that will use MATLAB software.
+
+**Course Instructor:** Dirk M. Luchtenburg (dirk.luchtenburg@cooper.edu)
+
+# Patch Notes/Detritus {-}
+
+To-Do:
+
+* Talk about underlining vs boldfacing vectors. And start doing the latter!
+* $\S$ 4.4
+* Flesh out Chapter 6
+* Finish Chapter 7
+
+Log:
+
+* 05.22.23 - Transplanted everything from the original LaTeX file here except for pictures. Some additional formatting changes needed, and a LOT of editing, but things look pretty good...
+
+* 05.18.23 - Made the jump from a LaTeX document on Github to Quarto at Prof. Luchtenburg's recommendation. It's pretty cool...can embed inline code and whatnot!

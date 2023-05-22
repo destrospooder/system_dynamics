@@ -1,0 +1,9 @@
+# Auxiliary Topics
+
+I don't like having an appendix at the end for these topics. What I'm probably going to do instead is spread them out throughout the book and put an asterisk on "optional sections". Ah well, content first!
+
+## A Quick and Dirty Introduction to Control
+
+## Too Many Blocks!
+
+## The Singular Value Decomposition

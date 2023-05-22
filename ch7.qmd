@@ -1,0 +1,324 @@
+# Dynamic Behavior and Linear Systems
+
+## Preface {-}
+
+The systems we've been encountering thus far have been of the form:
+
+\begin{equation*}
+    \begin{cases}
+        \boldsymbol{\dot{\boldsymbol{x}}} = \boldsymbol{f}(\boldsymbol{x}, \boldsymbol{u})\\
+        \boldsymbol{y} = \boldsymbol{h}(\boldsymbol{x}, \boldsymbol{u})
+    \end{cases}
+\end{equation*}
+
+We've been skirting around the fact that the state-space representation of a system also allows for $f$ and $h$ to be nonlinear maps of $x$ and $u$, since we've been focusing on analysis of linear systems, which uses the following form:
+
+\begin{equation*}
+    \begin{cases}
+        \boldsymbol{\dot{\boldsymbol{x}}} = \textbf{A} \boldsymbol{x} + \textbf{B} \boldsymbol{u}\\
+        \boldsymbol{y} = \textbf{C} \boldsymbol{x} + \textbf{D} \boldsymbol{u}
+    \end{cases}
+\end{equation*}
+
+Well, we finally got here. First, we'll tackle the case where $u$ is itself a function of $x$ (say...$u = \Psi(x)$). In other words:
+
+
+\begin{equation*}
+    \begin{cases}
+        \boldsymbol{\dot{\boldsymbol{x}}} = \boldsymbol{f}(\boldsymbol{x}, \Psi({\boldsymbol{x}})) = \boldsymbol{f}^*(\boldsymbol{x}) \\
+        \boldsymbol{y} = \boldsymbol{h}(\boldsymbol{x}, \Psi({\boldsymbol{x}})) = \boldsymbol{h}^*(\boldsymbol{x})
+    \end{cases}
+\end{equation*}
+
+As usual, the dynamic behavior of the system only really hinges on the state equation, so we'll focus on that. 
+
+
+$$\boldsymbol{\dot{\boldsymbol{x}}} = \boldsymbol{f}(\boldsymbol{x}, \Psi({\boldsymbol{x}})) = \boldsymbol{f}^*(\boldsymbol{x})$$
+
+Our objective in this chapter is to analyze the behavior of the solutions to this equation without solving it analytically. Understanding how to determine key traits of the system without having to solve the actual differential equation is crucial to understanding how to judge the stability of a system, which is a crucial topic in control theory.
+
+
+
+We also brushed over what exactly makes the state-space representation so compelling over the transfer function approach, especially since we spent so much time pouring over the Laplace transform and the frequency response. It's honestly a bit of a tossup - the transfer function representation of a system ends up being immensely powerful for methods of classical control, but being able to navigate the state space opens the door to useful tools from linear algebra.
+
+
+
+We define the **phase space**, also colloquially called the **state space**, the abstract space where the system's states $x_1, x_2, ..., x_n$ are coordinates. For now, we'll focus on two-dimensional LTI systems so things are easier to visualize - the plane with axes $x_1$ and $x_2$ is known as the **phase plane**.
+
+These two-dimensional LTI systems - also called **planar dynamical systems** - are sufficient to get a general idea of how qualitative analysis works. The ideas established here hold when we try to analyze dynamical behavior for systems with more state variables.
+
+
+
+Steven Strogatz illustrates an excellent example to develop intuition for two-dimensional systems - Romeo and Juliet. I highly recommend reading the section titled "Love Affairs" in his book on nonlinear dynamics and chaos.
+
+
+
+> "I'm not Dr. Phil, or Dr. Mark, or Dr. Dirk...so don't come to me with your relationship problems!"
+> 
+> Prof. Luchtenburg
+
+
+
+That being said, before we get to two dimensions, we have to touch upon the one-dimensional case. Let's first introduce some ideas in one dimension to beef up your intuition.
+
+## Panta Rei
+
+Yeah, Heraclitus probably didn't say "Panta Rei". No matter, it's catchy, and it's the unofficial motto of this class.
+
+
+
+When $\boldsymbol{x}$ only contains one state variable, the following equation is sufficient to describe the dynamic behavior of the system.^[Some of you might be wary about the usage of the word "system" to describe one equation. We'll adhere to the definitions established by Steven Strogatz, where the word "system" is used in the context of dynamical systems, not as a collection of more than one equation.] (with the assumptions established in the preface to this chapter).
+
+
+$$\dot{x} = f^* (x)$$
+
+Nonlinear system are finicky - they're usually pretty difficult to solve analytically. Alternatively, we analyze them qualitatively, using graphical methods, to map out their dynamic behavior. For the one-dimensional case, we've been doing this since Ma111.
+
+
+
+Say we're interested in the following nonlinear system:
+
+
+$$\dot{x} = \sin{x}$$
+
+First, we'll solve this analytically by separating the variables:
+
+
+$$\frac{dx}{\sin(x)} = dt$$ 
+$$\int{\csc(x) dx} = \int{dt}$$
+$$t = \ln\left|\csc(x) + \cot(x) \right| + c $$
+
+While these results are analytically correct, they're pretty difficult to interpret. For example, provided initial conditions, how would the system behave as time elapses?
+
+
+
+So rather than dealing with that...tommyrot..., we'll graphically portray this system as a vector field, graphing $\dot{x}$ against $x$.
+
+There's a bit to break down here. First, notice the arrows on the $x$-axis. If $\dot{x} > 0$ (or the value of the sine wave is positive), we draw an arrow pointing in the $+x$ direction. Likewise, if $\dot{x} < 0$ (or the sine wave is negative), we draw an arrow pointing in the $-x$ direction.
+
+
+
+At points where $\dot{x} = 0$, there is no flow at all. We call these points **equilibrium points**. When the point is book-ended by arrows pointing towards it, we call it a stable fixed point. When the point is book-ended by arrows pointing *away* from it, we denote it an unstable fixed point.
+
+
+
+Looking back at our system, we can conclude what happens when we pick an arbitrary initial condition. For whatever $x_0$ we pick:
+
+* if $\dot{x} > 0$, $x$ will increase until it asymptotically approaches the next highest fixed point. (Say, $x_0 = 0.7 \pi$. $x$ will increase until it approaches the next fixed point - $x = \pi$.)
+* if $\dot{x} < 0$, $x$ will decrease until it asymptotically approaches the fixed point directly beneath it. (Say, $x_0 = 0.3 \pi$. $x$ will decrease until it approaches the fixed point - $x = 0$.)
+
+We'll cover this idea of stability in more detail later in the course and in ME351, but this is really just meant to give you a head start in understanding the power of ignoring the math for just a second.
+
+## Eigen Eigen Eigen
+
+Eigenvalue's a scary word, and it seemingly comes up everywhere. Let's break it down.
+
+
+$$\textbf{A} \boldsymbol{v} = \lambda \boldsymbol{v}$$
+
+is what we call an **eigenproblem**. $\textbf{A}$ is a square matrix, $\boldsymbol{v}$ is what we call an **eigenvector**, and $\lambda$ is what we call an **eigenvalue**. All square matrices have eigenvalues and eigenvectors.
+
+
+
+So why define them? Well, eigenvectors (often shortened to e-vects) are special. When you multiply a square matrix by one of its eigenvectors, it scales that eigenvector by some constant (the eigenvalue).
+
+
+
+We can solve for the eigenvalues explicitly by rearranging the eigenproblem.
+
+
+$$\textbf{A} \boldsymbol{v} = \lambda \boldsymbol{v}$$
+$$\textbf{A} \boldsymbol{v} - \lambda \boldsymbol{v} = \boldsymbol{0}$$
+$$(\textbf{A} - \lambda \textbf{I}) \boldsymbol{v} = \boldsymbol{0}$$
+
+The zero vector always works as a trivial eigenvector (check it out if you don't believe me) so we'll omit that possibility. We have to find a nonzero $\boldsymbol{v}$ that satisfies this relation. This means that just multiplying both sides of the equation by $(\textbf{A} - \lambda \textbf{I})^{-1}$ won't cut it.
+
+
+
+Back to the eigenproblem. If we want to solve for a nonzero eigenvector, we want to find the case where the matrix $\textbf{A} - \lambda \textbf{I}$ is noninvertible.
+
+
+
+Recall that if the determinant of a matrix is 0, the matrix is noninvertible. Given a square matrix $\textbf{A}$, we define the **characteristic polynomial** of said matrix as $\text{det}(\textbf{A} - \lambda \textbf{I})$. Following from this, we define the **characteristic equation** of a matrix $\textbf{A}$ as the equation $\text{det}(\textbf{A} - \lambda \textbf{I})=0$.
+
+
+
+Suppose we wanted to find the eigenvalues of a $2\times2$ matrix $\textbf{A}$:
+
+
+$$\textbf{A} = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$$
+
+The eigenvalues of $\textbf{A}$ can be solved for with the characteristic equation as follows.
+
+
+$$\text{det}\left(\textbf{A} - \lambda \textbf{I} \right) = \text{det}\left(\begin{bmatrix} a & b \\ c & d \end{bmatrix} - \lambda \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}\right) = \text{det}\left(\begin{bmatrix} a - \lambda & b \\ c & d - \lambda \end{bmatrix} \right) $$
+$$= (a-\lambda)(d-\lambda)-bc = 0$$
+
+The characteristic equation can alternatively be defined in terms of the trace and determinant of the $2\times2$ square matrix:^[Pretty easily verifiable, give it a go!]
+
+
+$$\lambda^2 - \text{tr}(\textbf{A}) \lambda + \text{det}(\textbf{A}) = 0$$
+
+and the eigenvalues of the matrix can be defined explicitly as the solutions of said equation.
+
+$$\lambda_{1, 2} = \frac{\text{tr}(\textbf{A}) \pm \sqrt{(\text{tr}(\textbf{A}))^2 - 4 \, \text{det}(\textbf{A})}}{2}$$
+
+Great, we're halfway there. An eigenvector $(u_1, u_2)^T$ of the system associated with eigenvalue $\lambda_k$ will satisfy the following equation:
+
+$$\left[\det(\textbf{A} - \lambda \textbf{I}) \right]_{\lambda = \lambda_k} \begin{bmatrix}
+    u_1 \\
+    u_2\end{bmatrix} = \begin{bmatrix}
+        0 \\
+        0\end{bmatrix}$$
+
+Let's give this a shot with an example - what are the eigenvalues and eigenvectors of our favorite matrix?
+
+
+$$\textbf{A} = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}$$
+
+We plug $\textbf{A}$ into the characteristic equation:
+
+
+$$\text{det}\left(\textbf{A} - \lambda \textbf{I}\right) = \text{det}\left(\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} - \lambda \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}\right) = \text{det}\left(\begin{bmatrix} 1 - \lambda & 2 \\ 3 & 4 - \lambda \end{bmatrix} \right)$$
+
+$$ = (1-\lambda)(4-\lambda)-(2)(3) = 0$$
+$$\lambda^2 - 5\lambda -2 = 0$$
+
+The solutions $\lambda_1$ and $\lambda_2$ are $\textbf{A}$'s eigenvalues.
+
+
+$$\lambda_1 = \frac{1}{2} \left(5+\sqrt{33} \right) \qquad \qquad \qquad \lambda_2 = \frac{1}{2} \left(5 - \sqrt{33} \right)$$
+
+Now let's find the eigenvectors associated with these eigenvalues.
+
+I'm of course omitting a lot of nuance, but as always, if you want more background on eigenvalues and eigenvectors, take Ma326.
+
+## So What About Them Poles?
+
+We hinted earlier that the poles of a system's transfer function are equivalent to the eigenvalues of a system.^[Notably, this is NOT the case if the transfer function has pole-zero cancellation or the state-space representation isn't controllable and observable. This is a ME351 caveat though, we should be fine for now.] Let's prove that by converting from the state-space representation to a transfer function. (We'll assume the system is SISO (single-input single-output) because transfer functions are only viable for SISO systems.)^[Numerator is output and denominator is input. There's methods to consider MIMO (multiple-input multiple-output) systems as well using something called a **transfer function matrix**, but that's a story for another day.]
+
+
+$${\dot{x}} = \textbf{A} {x} + \textbf{B} {u}$$
+
+\vspace{-0.3in}
+$${y} = \textbf{C} {x} + \textbf{D} {u}$$
+
+First, we take the Laplace transform of each of these equations.
+
+
+$$sX = \textbf{A} X + \textbf{B} U$$
+\vspace{-0.3in}
+$$Y = \textbf{C} X + \textbf{D} U$$
+
+Given that we're interested in finding the transfer function, we're looking to isolate the expression equivalent to $H = \frac{Y}{U}$. To do this, we'll isolate $X$ in one of these equations and substitute it into the other.
+
+
+$$sX = \textbf{A} X + \textbf{B} U$$
+\vspace{-0.3in}
+$$(s\textbf{I}-\textbf{A}) X = \textbf{B} U$$
+\vspace{-0.3in}
+$$X = (s\textbf{I}-\textbf{A})^{-1} \textbf{B} U$$
+
+Looks good so far. Now, we plug $(s\textbf{I}-\textbf{A})^{-1} \textbf{B} U$ in for $X$ in the transformed output equation.
+
+
+$$Y = \textbf{C} (s\textbf{I}-\textbf{A})^{-1} \textbf{B} U + \textbf{D} U = (\textbf{C} (s\textbf{I}-\textbf{A})^{-1} \textbf{B} + \textbf{D}) U$$
+$$H = \frac{Y}{U} = \textbf{C} (s\textbf{I}-\textbf{A})^{-1} \textbf{B} + \textbf{D}$$
+
+Since the quantity $(s\textbf{I}-\textbf{A})^{-1}$ is defined as the ratio of the classical adjoint of $(s\textbf{I}-\textbf{A})$ to the determinant of $(s\textbf{I}-\textbf{A})$. Thus, the poles of $H(s)$ are exactly the same as the solutions to the equation $\text{det}(s\textbf{I}-\textbf{A}) = 0$.
+
+With a simple adjustment to how we examine the eigenproblem, we find that this equation is mathematically equivalent to how we defined the characteristic equation of $\textbf{A}$, when $s-\lambda$:
+
+$$\textbf{A} \boldsymbol{v} = \lambda \boldsymbol{v}$$
+$$\boldsymbol{0} = \lambda \boldsymbol{v} - \textbf{A} \boldsymbol{v}$$
+$$\boldsymbol{0} = (\lambda \textbf{I} - \textbf{A}) \boldsymbol{v}$$
+$$\text{det}(\lambda \textbf{I} - \textbf{A}) \boldsymbol{v} = 0$$
+
+These definitions of the characteristic equation are functionally the same for our purposes; they differ by a factor of $(-1)^n$, (where $n$ is the row/column length of square matrix $A$) which has no bearing on the roots of the equation.
+
+This means that the poles of the system is solely dependent on $\textbf{A}$. (More generally, the stability of the whole system solely hinges on $\textbf{A}$.)
+
+## State Transition Matrices and the Matrix Exponential
+
+## Linearization
+
+Linearization is an art. Sure, understanding the behavior of nonlinear systems qualitatively is cool and all, but nothing *really* compares to the beauty of an analytical solution.
+
+That being said, as we've established earlier in the chapter, nonlinear systems are difficult to solve. However, if we simplify the problem so that a solution that applies *near* a point of interest suffices, our life becomes much easier.
+
+A notable example of where we've encountered the idea of linearization before is the idea of a small-angle approximation, where:
+
+
+$$\sin(\theta) \approx \theta \qquad \qquad \cos(\theta) \approx 1$$
+
+for small $\theta$'s.
+
+
+
+First, let's tackle the idea of a one-dimensional linearization (or as we called it in Ma111, a linear approximation). For an arbitrary function $y = f(x)$, if $f$ is differentiable at a point $x_0$, the tangent line at $x=x_0$ passes through the point $x_0, f(x_0)$. This leads to the point-slope form of the tangent line at that point:
+
+
+$$y = f'(x_0) (x-x_0) + f(x_0)$$
+
+Observe that so long as $x_0 \approx x$, the linearization $y$ will yield a close approximation to the true value of $f$ at $x = x_0$. As our choice of $x$ shifts further from $x_0$, the accuracy of our approximation gets lousier and lousier.
+
+When we push forward from one dimension onwards, the path becomes murkier. If our objective is to develop control schemes for nonlinear dynamical systems based on linear models, it isn't really useful to linearize about *any* old point anymore. Rather, we select one of the nonlinear system's equilibrium points to linearize around.^[If this is a bit too hand-wavey for you, there's a theorem called the Hartman–Grobman theorem that posits that the local behavior of a dynamical system near an equilibrium point with $\text{Re}(\lambda) \neq 0$ is functionally equivalent to that of a linearization about that equilibrium point.]
+
+Note that a nonlinear system can have many equilibrium points, and that each can have a different linearization associated with it.
+
+Let's take a look at a general SISO nonlinear system, defined as follows:
+
+\begin{equation*}
+    \left\{ \begin{array}{ll}
+        \dot{x} = f(x, u) \\
+        y = h(x, u)
+    \end{array} \right.
+\end{equation*}
+
+with an equilibrium point at $x = x_e$ and $u = u_e$. So long as $x - x_e$ and $u - u_e$ are very tiny, we can reliably study the local behavior of the system for $(x,u)$ around the equilibrium points.
+
+We define a new state variable $z = x-x_e$, a new input $v = u-u_e$, and a new output $w = y - h(x_e, u_e)$, and rewrite the nonlinear system in terms of these deviations.
+
+\begin{equation*}
+    \left\{ \begin{array}{ll}
+        \dot{z} = f(x_e + z, u_e + v)\\
+        w = h(x_e + z, u_e + v) - h(x_e, u_e)
+    \end{array} \right.
+\end{equation*}
+
+Now, we use the same linear approximations we used in the one-dimensional case: 
+
+$$f(x_e + z, u_e + v) \approx \left[\frac{\partial f}{\partial x} \right]_{(x_e, u_e)} z + \left[\frac{\partial f}{\partial u} \right]_{(x_e, u_e)} v + f(x_e, u_e)$$
+$$h(x_e + z, u_e + v) \approx \left[\frac{\partial h}{\partial x} \right]_{(x_e, u_e)} z + \left[\frac{\partial h}{\partial u} \right]_{(x_e, u_e)} v + h(x_e, u_e)$$
+
+Since $\dot{x} = f(x_e, u_e) = 0$ and $w = h(x_e + z, u_e + v) - h(x_e, u_e)$ at equilibrium, we can reorganize these equations into the following linear form.
+
+
+\begin{equation*}
+    \begin{cases}
+        \dot{z} = \left[\frac{\partial f}{\partial x} \right]_{(x_e, u_e)} z + \left[\frac{\partial f}{\partial u} \right]_{(x_e, u_e)} v = Az + Bv\\
+        w = \left[\frac{\partial h}{\partial x} \right]_{(x_e, u_e)} z + \left[\frac{\partial h}{\partial u} \right]_{(x_e, u_e)} v = Cz + Dv
+    \end{cases}
+\end{equation*}
+
+We define the **Jacobian linearization** of a system as:
+
+
+\begin{equation*}
+    \begin{cases}
+        \dot{z} = Az + Bv \\
+        w = Cz + Dv
+    \end{cases}
+\end{equation*}
+
+This definition is easily generalizable when there are multiple inputs and multiple outputs - just add vector dashes and bold your matrices!^[Remind me to come back here and talk about trim at some point.]
+
+
+\begin{equation*}
+    \begin{cases}
+        \dot{\boldsymbol{z}} = \textbf{A}\boldsymbol{z} + \textbf{B}\boldsymbol{v} \\
+        \boldsymbol{w} = \textbf{C}\boldsymbol{z} + \textbf{D}\boldsymbol{v}
+    \end{cases}
+\end{equation*}
+
+## Modal Decomposition

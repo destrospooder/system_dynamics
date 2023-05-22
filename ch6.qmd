@@ -1,0 +1,121 @@
+# Frequency Response
+
+## Preface {-}
+
+Just as the impulse response characterizes all systems in the time domain, the **frequency response** characterizes all systems in the frequency domain. The frequency response is a linear system's steady-state response to sinusoidal inputs. 
+
+
+
+More broadly, the frequency response describes how a system responds to different frequencies of input signals. Understanding the frequency response is crucial for designing and analyzing systems like filters and amplifiers. It also plays a critical role in understanding the behavior of natural systems such as the human ear, which responds differently to different frequencies of sound waves.
+
+## That Hertz!
+
+So what exactly makes sinusoidal inputs so interesting? 
+
+
+
+Well, plugging a sinusoidal input into an LTI system yields a sinusoidal response of the same frequency (in the steady-state). However, the response *may* differ in amplitude and phase.
+
+As such, it's common to use the phasor representation of a sinusoid for frequency response techniques, where the magnitude of the complex number is the amplitude of the wave, and the angle of the complex number is the phase. Say our input is $u(t) = A \sin(\omega t)$. We can express this in terms of complex exponentials as follows:
+
+
+$$u(t) = A \sin(\omega t) = \frac{A}{2i} \left(e^{i\omega t} - e^{-i \omega t} \right)$$
+
+Using the convolution integral, let's solve for a potential $y(t)$.
+
+
+\begin{align*}
+y(t) &= \int_{0^-}^t h(\tau) u(t-\tau) \, d\tau \\
+&= \frac{A}{2i} \int_{0^-}^t h(\tau) \left(e^{i\omega (t - \tau)} - e^{-i \omega (t - \tau)} \right) \, d\tau = \frac{A}{2i} \int_{0^-}^t h(\tau) \left(e^{i\omega t} e^{-i\omega \tau} - e^{-i\omega t} e^{i\omega \tau} \right) \, d\tau \\
+&= \frac{A}{2i} \int_{0^-}^t h(\tau) \left(e^{i\omega t} e^{-i\omega \tau} \right) \, d\tau - \frac{A}{2i} \int_{0^-}^t h(\tau) \left(e^{-i\omega t} e^{i\omega \tau} \right) \, d\tau \\
+&= \frac{A}{2i} e^{i\omega t} \int_{0^-}^t h(\tau)  e^{-i\omega \tau} \, d\tau - \frac{A}{2i} e^{-i\omega t} \int_{0^-}^t h(\tau) e^{i\omega \tau} \, d\tau\\
+&= \frac{A}{2i} \left(e^{i\omega t}H(s) - e^{-i\omega t} H(-s) \right)
+\end{align*}
+
+We define the **frequency response function** $H(i\omega)$ as the transfer function $H(s)$ evaluated at $s=i\omega$. 
+
+
+$$\left[\frac{A}{2i} \left(e^{i\omega t}H(s) - e^{-i\omega t} H(-s) \right) \right]_{s = i \omega} = \frac{A}{2i} \left( H(i\omega) e^{i\omega t} - H(-i \omega)  e^{-i\omega t} \right)$$
+
+
+
+Notice that since the Laplace transform of the impulse response is the transfer function of a system, and the frequency response function $H(i\omega)$ is complex, we can represent it as the product of a magnitude $M$ and an exponential with phase $\varphi$:
+
+
+$$H(i\omega) = M e^{i\varphi}$$
+
+where $M = |H(i\omega)|$ and $\varphi = \measuredangle H(i\omega)$. We rewrite $y(t)$ as:
+
+
+$$y(t) = \frac{A}{2i} \left(M e^{i\omega t + \varphi} - M e^{-i \omega t - \varphi} \right) = AM \sin(\omega t + \varphi)$$
+
+Thus, if a system has a transfer function representation of $H(s)$, a sinusoidal input with amplitude $A$ will "become" a sinusoidal output with magnitude $AM$, shifted by phase angle $\varphi$.
+
+
+
+Let's be a tad less abstract now. The frequency response is characterized as the magnitude/gain $M(\omega)$ and the phase $\varphi(\omega)$. The magnitude is defined as the ratio of the output wave's amplitude to the input wave's amplitude, and the phase is defined as the offset of the output signal compared to the input signal.
+
+
+
+A positive magnitude means that the output wave is scaled up/magnified from the input wave. A negative magnitude means that the output wave is scaled down/contracted from the input wave. A positive phase means that the output wave leads the input wave, and a negative phase means that the output wave lags from the input wave.^[There are opposite conventions for the sign of phase in controls and vibrations. This is because vibrations engineers usually get things wrong.]
+
+## Intermezzo - Another Quick Dive into Complex Analysis {-}
+
+Thinking of complex numbers as vectors is great when trying to establish the notion of a "magnitude" (or more commonly in complex analysis textbooks, the modulus) of a complex number. The **magnitude** $|z|$ of a complex number $z = a + bi$ is defined as:
+
+
+$$|z| = |a+bi| = \sqrt{a^2 + b^2}$$
+
+A useful result for this course is that the magnitude of the product/quotient of complex numbers is equal to the product/quotient of the modulus of the complex numbers. For example:
+
+$$z = \frac{3 + i}{4 + 2i} \qquad \qquad |z| = \left|\frac{3 + i}{4 + 2i} \right| = \frac{\sqrt{3^2+1^2}}{\sqrt{4^2+2^2}} = \sqrt{\frac{10}{20}} = \sqrt{\frac{1}{2}} = \frac{\sqrt{2}}{2}$$
+
+The "phase" $\varphi$ (or more commonly in complex analysis textbooks, the argument) of a complex number is the polar angle from the positive real axis to the vector representation of $z$ in the complex plane.
+
+
+
+So say we're interested in finding the phase of $z = 3 + i$.
+
+It's clear that the phase $\varphi$ is equal to $\tan^{-1} \frac{1}{3}$. 
+
+
+
+(TALK ABOUT PRINCIPLE ARGUMENTS AND DOMAIN RESTRICTIONS)
+
+
+
+Another useful result for this course is that the phase of the product of two complex numbers is equal to the sum of the phase of the complex numbers. (Relatedly, the phase of the quotient of two complex numbers is equal to the difference of the phase of the complex numbers.)
+
+
+
+Say we're analyzing the system $\dot{y} + 3y = u$. What's the response to the sinusoidal input $u = A \cos(\omega t)$?
+
+
+
+The transfer function (and thus, the frequency response function) of the system is trivial to find:
+
+$$H(s) = \frac{1}{s+3} \qquad \qquad H(i\omega) = \left[H(s) \right]_{s=i\omega} = \frac{1}{i\omega + 3}$$
+
+$$M = \left|H(i\omega) \right| = \left|\frac{1}{i\omega + 3} \right| = \frac{1}{\sqrt{\omega^2 + 9}}$$ 
+$$\varphi = \measuredangle H(i\omega) = -\tan^{-1} \left(\frac{\omega}{3} \right)$$
+
+
+Note that in the preface (and a few other times) that I specified that the frequency response only shows a system's **steady-state** response. The frequency response is only applicable to the steady-state response of a system, and it does not provide information about the system's transient behavior.
+
+
+
+## It's Pronounced Boh-dee
+
+(TALK ABOUT BODE AT SOME POINT)
+
+How about a damped mass-spring system? Here's the equation of motion of a hypothetical system:
+
+
+$$\ddot{q}+2\zeta \omega_n \dot{q} + \omega_n^2 q = \omega_n^2 u$$
+
+To find the transfer function, we take the Laplace transform of both sides (assuming zero initial conditions) and get:
+
+$$(s^2+2\zeta\omega_n s + \omega_n^2) Q = \omega_n^2 U$$
+$$H = \frac{Q}{U} = \frac{\omega_n^2}{s^2+2\zeta\omega_n s + \omega_n^2}$$
+
+(LOOK AT INITIAL RESPONSE AND GO TO PLOTTING WITH PIECEWISE LINEARS)
