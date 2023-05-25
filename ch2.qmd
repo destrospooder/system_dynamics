@@ -12,7 +12,7 @@ We'll grow more accustomed to the idea of analogical models after modeling a few
 
 A cylindrical tank has a cross-sectional area of $A$, and an outflow rate of $Q_\text{out}$. The water height is governed by the function $h(t)$. The pressure outside the tank is $P_{\infty}$, and the fluid has a density of $\rho$. Can we derive a governing equation for this system in terms of $\Delta P = P - P_{\infty}$, where $P(t)$ is the pressure at the bottom of the tank?
 
-![](figs/1_tank.png){width=65%}
+![](figs/2_tank.png){width=65%}
 
 First off, because the tank is cylindrical, it's apparent that the volume $V(t)$ of water in the tank is proportional to the value of $h(t)$.
 
@@ -57,21 +57,23 @@ Perfect. Note that this isn't the only possible governing equation of the system
 
 Let's move onto a second example: the cooling of a lightbulb. When we shut off power to the lightbulb, how can we measure its temperature as it cools to room temperature?
 
-The bulb is initially very hot (with temperature $T$) compared to its environment (which has temperature $T_\infty$). Heat is flowing outwards at $\dot{q}_\text{out}$. ^[I'm not a fan of the usual notation here, so I'm using $\dot{q}$ for the flow of heat and $q$ for heat accumulated.] This is seeming very familiar...a temperature difference is driving heat to leave through the resistance $R$ of the bulb.
+![](figs/2_bulb.png){width=65%}
 
-Let's go through the steps again. What's being conserved here?^[Someone said kinetic energy. What a statistical mechanics-esque answer.] Internal energy! (Or heat, since there's no work in this system.) It might be a bit early in the semester to have seen the capacitive relationship relating heat $q$ and temperature $T$ in ESC330, but here it is:
+The bulb is initially very hot (with temperature $T$) compared to its environment (which has temperature $T_\infty$). Heat is flowing outwards at $q_\text{out}$. This is seeming very familiar...a temperature difference is driving heat to leave through the resistance $R$ of the bulb.
 
-$$\Delta q = C \Delta T$$
+Let's go through the steps again. Energy's being conserved here, so we use the capacitive relationship relating accumulated heat $Q$ and temperature $T$ from ESC330:
+
+$$\Delta Q = C \Delta T$$
 
 Differentiate across the board...
 
-$$\frac{d}{dt} \left(C \Delta T \right) = C\dot{T} = -\dot{q}_\text{out}$$
+$$\frac{d}{dt} \left(C \Delta T \right) = C\dot{T} = -q_\text{out}$$
 
 And now we're just chugging through the motions. Next is another constitutive relationship (which looks shudderingly close to Ohm's law!):
 
-$$\Delta T = T - T_\infty = \dot{q}_\text{out} R$$
+$$\Delta T = T - T_\infty = q_\text{out} R$$
 
-Using this and the conservation equation, we construct:
+We combine the last two equations and construct:
 
 $$\boxed{RC \dot{T} + \Delta T = 0}$$
 
@@ -115,6 +117,7 @@ $$\boxed{RC \dot{V} + \Delta V = 0}$$
 which is the same equation we've gotten before. (Notably, we don't have to have this equation in terms of the voltage difference; as you'll see in ESC221 this semester, there's a form of the equation in terms of current as well.)
 
 Final takeaways:
+
 * Most first order systems we'll analyze in this class are the same mathematically!
 * **Level differences (gradients) make stuff flow.**
 

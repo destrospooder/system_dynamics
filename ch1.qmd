@@ -1,6 +1,6 @@
 # Course Motivation and Overview
 
-## Preface
+## First Ramblings
 
 The course is called Systems Engineering in the course catalog, but Prof. Luchtenburg calls it System Dynamics instead. It's a more apt name for what the course actually covers; if you look up Systems Engineering you'll find a completely different subject.
 
