@@ -1,6 +1,6 @@
 # General Information {-}
 
-This is a living document created from markdown and executable code. Feel free to reach out if you find typos or have suggestions. It's a passion project though, so my response time may vary.
+This is a living document created from Markdown and executable code. Feel free to reach out if you find typos or have suggestions. It's a passion project though, so my response time may vary.
 
 **My Email:** benjamin.aziel@cooper.edu
 
@@ -13,12 +13,14 @@ An introductory course to the mathematical modeling of systems. Topics include m
 
 To-Do:
 
-* Talk about underlining vs boldfacing vectors. And start doing the latter!
+* Replace all figures with acceptable alternatives
 * $\S$ 4.4
 * Flesh out Chapter 6
 * Finish Chapter 7
 
 Log:
+
+* 06.02.23 - Chapter 2 looks good
 
 * 05.22.23 - Transplanted everything from the original LaTeX file here except for pictures. Some additional formatting changes needed, and a LOT of editing, but things look pretty good...
 

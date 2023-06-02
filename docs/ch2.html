@@ -171,7 +171,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
   <li><a href="#gradients-make-stuff-flow" id="toc-gradients-make-stuff-flow" class="nav-link" data-scroll-target="#gradients-make-stuff-flow"><span class="header-section-number">2.1</span> Gradients Make Stuff Flow</a></li>
-  <li><a href="#the-rc-circuit-and-final-generalization" id="toc-the-rc-circuit-and-final-generalization" class="nav-link" data-scroll-target="#the-rc-circuit-and-final-generalization"><span class="header-section-number">2.2</span> The RC Circuit and Final Generalization</a></li>
+  <li><a href="#the-time-constant" id="toc-the-time-constant" class="nav-link" data-scroll-target="#the-time-constant"><span class="header-section-number">2.2</span> The Time Constant</a></li>
   <li><a href="#lets-throw-in-an-input" id="toc-lets-throw-in-an-input" class="nav-link" data-scroll-target="#lets-throw-in-an-input"><span class="header-section-number">2.3</span> Let’s Throw in an Input</a></li>
   </ul>
 </nav>
@@ -207,71 +207,117 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="gradients-make-stuff-flow" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="gradients-make-stuff-flow"><span class="header-section-number">2.1</span> Gradients Make Stuff Flow</h2>
-<p>A cylindrical tank has a cross-sectional area of <span class="math inline">\(A\)</span>, and an outflow rate of <span class="math inline">\(Q_\text{out}\)</span>. The water height is governed by the function <span class="math inline">\(h(t)\)</span>. The pressure outside the tank is <span class="math inline">\(P_{\infty}\)</span>, and the fluid has a density of <span class="math inline">\(\rho\)</span>. Can we derive a governing equation for this system in terms of <span class="math inline">\(\Delta P = P - P_{\infty}\)</span>, where <span class="math inline">\(P(t)\)</span> is the pressure at the bottom of the tank?</p>
-<p><img src="figs/2_tank.png" class="img-fluid" style="width:65.0%"></p>
+<p>A cylindrical tank has a cross-sectional area of <span class="math inline">\(A\)</span>, and an outflow rate of <span class="math inline">\(Q_\text{out}\)</span>. The height of the fluid is defined by the function <span class="math inline">\(h(t)\)</span>. The pressure outside the tank is <span class="math inline">\(P_{\infty}\)</span>, and the fluid has a density of <span class="math inline">\(\rho\)</span>. Can we derive a governing equation for this system in terms of <span class="math inline">\(\Delta P = P - P_{\infty}\)</span>, where <span class="math inline">\(P(t)\)</span> is the pressure at the bottom of the tank?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figs/2_tank.png" class="img-fluid figure-img" style="width:65.0%"></p>
+</figure>
+</div>
 <p>First off, because the tank is cylindrical, it’s apparent that the volume <span class="math inline">\(V(t)\)</span> of water in the tank is proportional to the value of <span class="math inline">\(h(t)\)</span>.</p>
 <p><span class="math display">\[V(t) = A h(t)\]</span></p>
 <p>Because of conservation of mass, we know the rate at which the volume is changing is the difference between the inflow and the outflow.</p>
 <p><span class="math display">\[\frac{d}{dt} V(t) = \dot{V} = 0 -Q_\text{out} = -Q_\text{out} \tag{1}\]</span></p>
-<p>That’s not very useful yet. Let’s leverage some prior circuits knowledge here…charge moves because of a voltage difference <span class="math inline">\(\Delta V\)</span>, and comparably, fluid moves because of a pressure difference.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Ohm’s law! We’ll come back to that, but the main takeaway here is that the outflow <span class="math inline">\(Q_\text{out}\)</span> is related to the difference between the pressure inside the tank <span class="math inline">\(P(t)\)</span> and the atmospheric pressure <span class="math inline">\(P_\infty\)</span> by a “resistance” value <span class="math inline">\(R\)</span>.</p>
+<p>That’s not very useful yet. Let’s leverage some prior circuits knowledge here…charge moves because of a voltage difference <span class="math inline">\(\Delta V\)</span>, and comparably, fluid moves because of a pressure difference.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Ohm’s law! We’ll come back to that, but the main takeaway here is that the volumetric outflow <span class="math inline">\(Q_\text{out}\)</span> is related to the difference between the pressure inside the tank <span class="math inline">\(P(t)\)</span> and the atmospheric pressure <span class="math inline">\(P_\infty\)</span> by a “resistance” value <span class="math inline">\(R\)</span>.</p>
 <p>That circuits analogy comes in handy really often, because it turns out Ohm’s law translates directly into fluid flow.</p>
 <p><span class="math display">\[\Delta V = V - V_0 = IR\]</span> <span class="math display">\[\Delta P = P(t) - P_\infty = Q_\text{out} R \tag{2}\]</span></p>
 <p>These are called <strong>constitutive equations</strong>, or relationships between physical quantities that establish a connection between a material’s internal response (like stress, strain, or deformation) and the external factors that influence it (like temperature, pressure, or applied loads).</p>
 <p>We’ll generalize a bit soon, but for now I understand if you don’t get it. It’s still very hand-wavey.</p>
 <p>Let’s leverage some hydrostatics now. Assuming the tank is open to the atmosphere at the top, we can derive an expression for <span class="math inline">\(\Delta P\)</span> using the hydrostatic pressure equation <span class="math inline">\(\Delta P = \rho g \Delta h\)</span>.</p>
 <p><span class="math display">\[\Delta P = P(t) - P_\infty = \rho g \left(h(t) \right) = \frac{\rho g V}{A}\tag{3}\]</span></p>
-<p>Differentiating equation (3) yields the following:</p>
-<p><span class="math display">\[ \dot{P} = \frac{\rho g \dot{V}}{A} \]</span></p>
+<p>Differentiating equation (3) yields the following.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p><span class="math display">\[ \Delta \dot{P}  = \frac{\rho g \dot{V}}{A} \]</span></p>
 <p>Using equations (1) and (2), we can manipulate this equation into a differential equation in terms of pressure differences.</p>
-<p><span class="math display">\[ \dot{P} = \frac{\rho g \left(- Q_\text{out} \right)}{A} = \frac{- \rho g \Delta P}{A R}\]</span></p>
-<p><span class="math display">\[\dot{P} + \frac{\rho g}{A R} \Delta P = 0\]</span></p>
-<p><span class="math display">\[R \left( \frac{A}{\rho g}\right) \dot{P} + \Delta P = 0\]</span></p>
+<p><span class="math display">\[ \Delta \dot{P} = \frac{\rho g \left(- Q_\text{out} \right)}{A} = \frac{- \rho g \Delta P}{A R}\]</span></p>
+<p><span class="math display">\[\Delta \dot{P} + \frac{\rho g}{A R} \Delta P = 0\]</span></p>
+<p><span class="math display">\[R \left( \frac{A}{\rho g}\right) \Delta \dot{P} + \Delta P = 0\]</span></p>
 <p>This is a neat little differential equation. It looks like the equation for an RC circuit if you’ve seen those before, with the voltage differences swapped out for pressure differences. To really drive this comparison home, we define a “capacitance” <span class="math inline">\(C = \frac{A}{\rho g}\)</span> and slot it into our governing equation.</p>
-<p><span class="math display">\[\boxed{RC \dot{P} + \Delta P = 0}\]</span></p>
+<p><span class="math display">\[\boxed{RC \Delta \dot{P} + \Delta P = 0}\]</span></p>
 <p>Perfect. Note that this isn’t the only possible governing equation of the system - it’s also possible to find a differential equation in terms of volume <span class="math inline">\(V(t)\)</span>. Give it a go!</p>
 <p>Let’s move onto a second example: the cooling of a lightbulb. When we shut off power to the lightbulb, how can we measure its temperature as it cools to room temperature?</p>
-<p><img src="figs/2_bulb.png" class="img-fluid" style="width:65.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figs/2_bulb.png" class="img-fluid figure-img" style="width:65.0%"></p>
+</figure>
+</div>
 <p>The bulb is initially very hot (with temperature <span class="math inline">\(T\)</span>) compared to its environment (which has temperature <span class="math inline">\(T_\infty\)</span>). Heat is flowing outwards at <span class="math inline">\(q_\text{out}\)</span>. This is seeming very familiar…a temperature difference is driving heat to leave through the resistance <span class="math inline">\(R\)</span> of the bulb.</p>
 <p>Let’s go through the steps again. Energy’s being conserved here, so we use the capacitive relationship relating accumulated heat <span class="math inline">\(Q\)</span> and temperature <span class="math inline">\(T\)</span> from ESC330:</p>
-<p><span class="math display">\[\Delta Q = C \Delta T\]</span></p>
+<p><span class="math display">\[ Q = C \Delta T\]</span></p>
 <p>Differentiate across the board…</p>
-<p><span class="math display">\[\frac{d}{dt} \left(C \Delta T \right) = C\dot{T} = -q_\text{out}\]</span></p>
+<p><span class="math display">\[ \dot{Q} = -q_\text{out} = C \Delta \dot{T} \]</span></p>
 <p>And now we’re just chugging through the motions. Next is another constitutive relationship (which looks shudderingly close to Ohm’s law!):</p>
 <p><span class="math display">\[\Delta T = T - T_\infty = q_\text{out} R\]</span></p>
 <p>We combine the last two equations and construct:</p>
-<p><span class="math display">\[\boxed{RC \dot{T} + \Delta T = 0}\]</span></p>
-<p>Again. Familiar. Very familiar. Maybe there’s some unifying theory in the background here. We’ll generalize that equation to what we call its <strong>canonical form</strong> <span class="math inline">\(\tau \dot{y} + y = 0\)</span>, a first order differential equation. Let’s throw in an initial condition <span class="math inline">\(y(0)=y_0\)</span> just so we don’t have any undetermined constants at the end.</p>
-<p>To solve this differential equation, we’ll guess a solution <span class="math inline">\(y(t) = ce^{\alpha t}\)</span>, find its time derivative <span class="math inline">\(\dot{y}(t) = \alpha ce^{\alpha t} = \alpha y\)</span>, and plug in.</p>
-<p><span class="math display">\[\tau \dot{y} + y = 0\]</span> <span class="math display">\[\tau \alpha e^{\alpha t} + e^{\alpha t} = 0\]</span> <span class="math display">\[(\tau \alpha + 1) \; e^{\alpha t} = 0\]</span> <span class="math display">\[\alpha = -\frac{1}{\tau}\]</span> <span class="math display">\[y(t) = ce^{-\frac{t}{\tau}} = y_0 \; e^{-\frac{t}{\tau}}\]</span></p>
-<p>If you look at the graph below, it’s just exponential decay from <span class="math inline">\((0, y_0)\)</span>. We call <span class="math inline">\(\tau\)</span> the <strong>time constant</strong> of the system, and it’s commonly used to describe how quickly an exponential decays or grows. Different systems have different time constants. (Notably, <span class="math inline">\(RC\)</span> always has units of time). The smaller the time constant, the faster the decay. (Assume for the figure below that <span class="math inline">\(\tau_1 = 10\)</span> and <span class="math inline">\(\tau_2 = 5\)</span>.)</p>
-<p>So what happens when we set <span class="math inline">\(t=\tau\)</span>? Let’s plug it in and find out.</p>
-<p><span class="math display">\[y(\tau) = y_0 e^{-\frac{\tau}{\tau}} = y_0 e^{-1}\]</span></p>
-<p>So the time constant is the time at which the system response has decayed to <span class="math inline">\(y_0 e^{-1}\)</span>, or approximately 37% of its initial value. We can also reframe this definition as, “the time constant is the time at which the system response has lost approximately 63% of its initial value”.</p>
-</section>
-<section id="the-rc-circuit-and-final-generalization" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="the-rc-circuit-and-final-generalization"><span class="header-section-number">2.2</span> The RC Circuit and Final Generalization</h2>
-<p>Say we have an RC circuit with a full capacitor.</p>
-<p>The outflow of charge from the capacitor is represented as a negative current: <span class="math display">\[\dot{q} = -I_\text{out}\]</span></p>
-<p>Here’s Ohm’s law: <span class="math display">\[\Delta V = I_\text{out} R = -\dot{q} R\]</span> <span class="math display">\[\dot{q} = -\frac{\Delta V}{R}\]</span></p>
-<p>Finally, we deal in the capacitive relationship (from Ph213): <span class="math display">\[q = C\Delta V\]</span></p>
-<p>We differentiate the capacitive relationship in order to set these equations equal to each other and get:</p>
-<p><span class="math display">\[C\dot{V} = -\frac{\Delta V}{R}\]</span> <span class="math display">\[\boxed{RC \dot{V} + \Delta V = 0}\]</span></p>
-<p>which is the same equation we’ve gotten before. (Notably, we don’t have to have this equation in terms of the voltage difference; as you’ll see in ESC221 this semester, there’s a form of the equation in terms of current as well.)</p>
-<p>Final takeaways:</p>
+<p><span class="math display">\[\boxed{RC \Delta \dot{T} + \Delta T = 0}\]</span></p>
+<p>Which surprisingly, just looks like the equation from the first problem.</p>
+<p>Ok, one more problem. Say we have an RC circuit - specifically, the variant where a resistor and a fully charged capacitor are connected in series without a attached voltage source.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figs/2_circ.png" class="img-fluid figure-img" style="width:65.0%"></p>
+</figure>
+</div>
+<p>As we’ve done twice before, we leverage physical principles to generate a governing equation for this system. Let’s start with conservation of charge: <span class="math display">\[\dot{q} = -I_\text{out}\]</span></p>
+<p>Next, Ohm’s law: <span class="math display">\[\Delta V = I_\text{out} R = -\dot{q} R\]</span> <span class="math display">\[\dot{q} = -\frac{\Delta V}{R}\]</span></p>
+<p>Finally, we deal in the capacitive relationship: <span class="math display">\[q = C\Delta V\]</span></p>
+<p>Manipulating these equations as we did before yields the following governing equation:</p>
+<p><span class="math display">\[C \Delta \dot{V} = -\frac{\Delta V}{R}\]</span> <span class="math display">\[\boxed{RC \Delta \dot{V} + \Delta V = 0}\]</span></p>
+<p>All right, so all of these equations look really similar. What can we take away from this?</p>
+<p><strong>Gradients make stuff flow.</strong></p>
+<p>That’s a really powerful statement…to those who understand it. Let’s go through it piece by piece.</p>
+<p>We define a <strong>gradient</strong> as a change in the magnitude of a potential observed at two different points. Some examples of potentials are:</p>
 <ul>
-<li>Most first order systems we’ll analyze in this class are the same mathematically!</li>
-<li><strong>Level differences (gradients) make stuff flow.</strong></li>
+<li>Temperature</li>
+<li>Voltage</li>
+<li>Displacement</li>
+<li>Species concentration</li>
 </ul>
-<p>“Stuff” isn’t the greatest word for something like this, (maybe quantity or ‘energy’ instead?) but that’s the best we have. Stuff can be stored, like charge in a capacitor, or fluid in a tank, or heat in a reservoir. However, by generalizing these quantities, we can create widely applicable rules for modeling first order systems.</p>
-<p><span class="math display">\[\text{Stuff} = \text{Capacitance} \times \text{Level Difference}\]</span> <span class="math display">\[\text{Level Difference} = \text{Flow of Stuff} \times \text{Resistance}\]</span></p>
-<p>Also conservation. That’s a biggie. <span class="math display">\[\text{Rate of Change of Stuff} = \text{Inflow} - \text{Outflow}\]</span></p>
-<p>We’ve only discussed scenarios where there isn’t anything flowing in thus far. In these cases, to solve nonhomogeneous differential equations, we’ll have to use more specialized methods from Ma240 instead of guessing and praying, like the Laplace transform or the method of undetermined coefficients (or as I affectionately call it, MUC).</p>
+<p>When a potential difference exists, “stuff” has a tendency to move. For example, when a temperature difference exists across a structure, heat will flow through it.</p>
+<p>“Stuff” isn’t the greatest word for something like this, (maybe “quantity” instead?) but to the best of my knowledge, a better word doesn’t exist. We define “stuff” as something that can be stored, like charge in a capacitor, or fluid in a tank, or heat in a reservoir.</p>
+<p>By generalizing these quantities, we can create widely applicable rules for modeling first order systems without having specific knowledge about the underlying physics.</p>
+<p><span class="math display">\[\text{Stuff} = \text{Capacitance} \times \text{Gradient}\]</span> <span class="math display">\[\text{Gradient} = \text{Flow of Stuff} \times \text{Resistance}\]</span></p>
+<p>Also conservation. That’s a big one. <span class="math display">\[\text{Rate of Change of Stuff} = \text{Inflow} - \text{Outflow}\]</span></p>
+</section>
+<section id="the-time-constant" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="the-time-constant"><span class="header-section-number">2.2</span> The Time Constant</h2>
+<p>All of the governing equations we’ve derived thus far have been of the form <span class="math inline">\(\tau \dot{y} + y = 0\)</span>. This form, also called the <strong>canonical form</strong>, is useful for understanding the behavior of the dynamic system.</p>
+<p>To solve this differential equation, we’ll guess a solution <span class="math inline">\(y(t) = ce^{\alpha t}\)</span>, find its time derivative <span class="math inline">\(\dot{y}(t) = \alpha ce^{\alpha t} = \alpha y\)</span>, and plug in.</p>
+<p><span class="math display">\[\tau \dot{y} + y = 0\]</span> <span class="math display">\[\tau \alpha e^{\alpha t} + e^{\alpha t} = 0\]</span> <span class="math display">\[(\tau \alpha + 1) \; e^{\alpha t} = 0\]</span> <span class="math display">\[\alpha = -\frac{1}{\tau}\]</span> <span class="math display">\[y(t) = ce^{-\frac{t}{\tau}}\]</span></p>
+<p>Let’s toss in an initial condition <span class="math inline">\(y(0)=y_0\)</span> to get rid of that unknown constant.</p>
+<p><span class="math display">\[y(t) = y_0 \; e^{-\frac{t}{\tau}}\]</span></p>
+<p>We call <span class="math inline">\(\tau\)</span> the <strong>time constant</strong> of the system.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> The time constant of a system is used to describe how quickly the system response grows or decays. The smaller the time constant, the faster the decay.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figs/2_tc.png" class="img-fluid figure-img" style="width:75.0%"></p>
+</figure>
+</div>
+<p>So what happens when we set <span class="math inline">\(t=\tau\)</span>?</p>
+<p><span class="math display">\[y(\tau) = y_0 e^{-\frac{\tau}{\tau}} = y_0 e^{-1}\]</span></p>
+<p>The time constant is the time at which the system response has decayed to <span class="math inline">\(y_0 e^{-1}\)</span>, or approximately 37% of its initial value.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 </section>
 <section id="lets-throw-in-an-input" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="lets-throw-in-an-input"><span class="header-section-number">2.3</span> Let’s Throw in an Input</h2>
-<p>A more simple form of the governing equation for one of these first order systems is:</p>
-<p><span class="math display">\[\tau \dot{y} + y = ku\]</span></p>
-<p>when we have a constant input. Think of it as turning on a light switch at time <span class="math inline">\(t=0\)</span>. <span class="math inline">\(k\)</span> is just a scale factor, and <span class="math inline">\(u = u_s(t)\)</span>, where <span class="math inline">\(u_s\)</span> is the unit step function, which is just <span class="math inline">\(0\)</span> when <span class="math inline">\(t&lt;0\)</span> and <span class="math inline">\(1\)</span> when <span class="math inline">\(t&gt;0\)</span>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>We return to the RC circuit, but this time, let’s say there <em>is</em> a voltage source with voltage <span class="math inline">\(V_\text{s}\)</span>. The capacitor initially has a voltage of <span class="math inline">\(V_0\)</span>, and as time passes, it will charge up through the resistor until it reaches the supply voltage of the source. (We define the voltage across the capacitor as <span class="math inline">\(V_c(t)\)</span>.)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figs/2_circ2.png" class="img-fluid figure-img" style="width:65.0%"></p>
+</figure>
+</div>
+<p>To expedite calculations, we’ll use Kirchhoff’s current law to find a governing equation for this scenario.</p>
+<p><span class="math display">\[ C \dot{V_c} + \frac{V_c - V_s}{R} = 0 \]</span> <span class="math display">\[ RC \dot{V_c} + V_c = V_s \]</span></p>
+<p>That’s…different. This equation is no longer homogeneous, meaning we can’t rely on our exponential function guess method anymore. We’ll have to use more specialized methods from Ma240 instead of guessing and praying, like the method of undetermined coefficients or the Laplace transform if initial conditions are provided.</p>
+<p>A more general form of this governing equation for one of these systems is:</p>
+<p><span class="math display">\[\tau \dot{y} + y = u\]</span></p>
+<p>where <span class="math inline">\(u\)</span> represents a general input, constant or otherwise. For example, in the case that the voltage source is an alternator, <span class="math inline">\(V_s\)</span> could be a sinusoidal function rather than a constant.</p>
+<p>This feels like a good time to introduce the concept of the <strong>unit step function</strong>, which I’ll denote <span class="math inline">\(u_s(t)\)</span>. The unit step function is defined as follows:<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<p><span class="math display">\[\begin{equation*}
+        u_s(t) = \begin{cases}
+                        1 &amp;t&gt;0 \\
+                        0 &amp;t&lt;0
+                    \end{cases}
+\end{equation*}\]</span></p>
+<p>The unit step function is useful for physical modeling because it can be used to model situations where something changes rapidly from one value to another. For example, the unit step function can be used to model turning on a light switch at time.</p>
+<p>A general form of the governing equation when the input is constant is:</p>
+<p><span class="math display">\[\tau \dot{y} + y = ku_s\]</span></p>
+<p>where <span class="math inline">\(k\)</span> is a scale factor. Solving this equation yields:</p>
 <p><span class="math display">\[y(t) = ce^{-\frac{t}{\tau}} + k\]</span></p>
 <p>For the initial condition <span class="math inline">\(y(0) = y_0\)</span>, the undetermined coefficient <span class="math inline">\(c=y_0 - k\)</span>. Here’s our updated solution:</p>
 <p><span class="math display">\[y(t) = y_0 e^{-\frac{t}{\tau}} + k(1-e^{-\frac{t}{\tau}})\]</span></p>
@@ -289,7 +335,10 @@ ul.task-list li input[type="checkbox"] {
 <hr>
 <ol>
 <li id="fn1"><p>Note that <span class="math inline">\(V\)</span> here refers to voltage, and not volume as previously defined. This contingency also holds true for Ohm’s law as defined below.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>We don’t care about what happens at <span class="math inline">\(t=0\)</span>. Stop it.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Note that the derivative of <span class="math inline">\(\Delta P\)</span> is equal to the derivative of <span class="math inline">\(P(t)\)</span>, because <span class="math inline">\(P_\infty\)</span> is constant.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Note that <span class="math inline">\(\tau = RC\)</span> always has units of time.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Or alternatively, “the time constant is the time at which the system response has lost approximately 63% of its initial value”.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>We don’t care about what happens at <span class="math inline">\(t=0\)</span>. Stop it.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
