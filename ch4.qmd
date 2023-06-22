@@ -207,7 +207,7 @@ Again, trivially, the sum of two skew-symmetric matrices is symmetric, and a sca
 This factoid turns out to be crucial if we focus on the 3-space case, there are only three independent entries of a skew-symmetric matrix. We can define a skew-symmetric operator for vectors in 3-space skew() as follows:^[Yeah, you'll see awful notation everywhere for this thing. I'm going to use skew() because why not.]
 
 
-$$\text{skew}(\boldsymbol{x}) = \text{skew}(x_1, x_2, x_3) = \begin{bmatrix} 0 & -x_1 & x_2 \\ x_1 & 0 & -x_3 \\ -x_2 & x_3 & 0\end{bmatrix} $$
+$$\text{skew}(\boldsymbol{x}) = \text{skew}((x_1, x_2, x_3)) = \begin{bmatrix} 0 & -x_1 & x_2 \\ x_1 & 0 & -x_3 \\ -x_2 & x_3 & 0\end{bmatrix} $$
 
 This operator comes with a really cool property:
 

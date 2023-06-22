@@ -20,7 +20,9 @@ To-Do:
 
 Log:
 
-* 06.02.23 - Chapter 2 looks good
+* 06.19.23 - Chapter 3 looks good
+
+* 06.06.23 - Chapter 2 looks good
 
 * 05.22.23 - Transplanted everything from the original LaTeX file here except for pictures. Some additional formatting changes needed, and a LOT of editing, but things look pretty good...
 

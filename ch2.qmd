@@ -22,7 +22,7 @@ Because of conservation of mass, we know the rate at which the volume is changin
 
 $$\frac{d}{dt} V(t) = \dot{V} = 0 -Q_\text{out} = -Q_\text{out} \tag{1}$$
 
-That's not very useful yet. Let's leverage some prior circuits knowledge here...charge moves because of a voltage difference $\Delta V$, and comparably, fluid moves because of a pressure difference.^[Note that $V$ here refers to voltage, and not volume as previously defined. This contingency also holds true for Ohm's law as defined below.] Ohm's law! We'll come back to that, but the main takeaway here is that the volumetric outflow $Q_\text{out}$ is related to the difference between the pressure inside the tank $P(t)$ and the atmospheric pressure $P_\infty$ by a "resistance" value $R$.
+That's not very useful yet. Let's leverage some prior circuits knowledge here...charge moves because of a voltage difference $\Delta V$, and comparably, fluid moves because of a pressure difference.^[$V$ refers to voltage here, and not volume as previously defined. This contingency also holds true for Ohm's law as defined below.] Ohm's law! We'll come back to that, but the main takeaway here is that the volumetric outflow $Q_\text{out}$ is related to the difference between the pressure inside the tank $P(t)$ and the atmospheric pressure $P_\infty$ by a "resistance" value $R$.
 
 That circuits analogy comes in handy really often, because it turns out Ohm's law translates directly into fluid flow.
 
@@ -139,7 +139,7 @@ Let's toss in an initial condition $y(0)=y_0$ to get rid of that unknown constan
 
 $$y(t) = y_0 \; e^{-\frac{t}{\tau}}$$
 
-We call $\tau$ the **time constant** of the system.^[Note that $\tau = RC$ always has units of time.] The time constant of a system is used to describe how quickly the system response grows or decays. The smaller the time constant, the faster the decay. 
+We call $\tau$ the **time constant** of the system.^[$\tau = RC$ always has units of time.] The time constant of a system is used to describe how quickly the system response grows or decays. The smaller the time constant, the faster the decay.
 
 ![](figs/2_tc.png){width=75% fig-align="center"}
 
@@ -178,21 +178,21 @@ This feels like a good time to introduce the concept of the **unit step function
                     \end{cases}
 \end{equation*}
 
-The unit step function is useful for physical modeling because it can be used to model situations where something changes rapidly from one value to another. For example, the unit step function can be used to model turning on a light switch at time.
+The unit step function is useful for physical modeling because it can be used to model situations where something changes rapidly from one value to another. (For example, the unit step function can be used to model the action of turning on a light switch at time $t=0$, where 0 represents the light being off and 1 represents the light being on!).
 
 A general form of the governing equation when the input is constant is:
 
 $$\tau \dot{y} + y = ku_s$$
 
-where $k$ is a scale factor. Solving this equation yields:
+where $k$ is an arbitrary scale factor. Solving this equation yields:
 
 $$y(t) = ce^{-\frac{t}{\tau}} + k$$
 
-For the initial condition $y(0) = y_0$, the undetermined coefficient $c=y_0 - k$. Here's our updated solution:
+For the initial condition $y(0) = y_0$, the constant $c=y_0 - k$. Here's our updated solution:
 
 $$y(t) = y_0 e^{-\frac{t}{\tau}} + k(1-e^{-\frac{t}{\tau}})$$
 
-When we graph this function for $y_0 = 0$, we see that it gradually grows towards $y=k$ as $t\to\infty$. Now we can analyze exponential growth. You see this behavior everywhere, like when you change a thermostat setting and the temperature slowly creeps towards your choice. This is what we call a **step response**.
+When we graph this function for $y_0 = 0$, we see that it gradually grows towards $y=k$ as $t\to\infty$. Now we can analyze exponential growth - you see this behavior everywhere, like when you change a thermostat setting and the temperature slowly creeps towards your choice. The response of a system in the time domain when the input is switched from 0 to 1 very quickly is called a **step response**.
 
 How could we find the time constant of this response? Let's take a look at what happens to $y(t)$ at $t=\tau$.
 
