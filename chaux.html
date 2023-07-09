@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Benjamin Aziel">
-<meta name="dcterms.date" content="2023-07-02">
 
-<title>System Dynamics</title>
+<title>System Dynamics - 8&nbsp; Auxiliary Topics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ch1.html" rel="next">
+<link href="./ch7.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -64,8 +62,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -78,7 +74,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">General Information</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chaux.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Auxiliary Topics</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -108,7 +104,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">General Information</span></a>
   </div>
 </li>
@@ -156,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chaux.html" class="sidebar-item-text sidebar-link">
+  <a href="./chaux.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Auxiliary Topics</span></span></a>
   </div>
 </li>
@@ -170,8 +166,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#general-information" id="toc-general-information" class="nav-link active" data-scroll-target="#general-information">General Information</a></li>
-  <li><a href="#patch-notesdetritus" id="toc-patch-notesdetritus" class="nav-link" data-scroll-target="#patch-notesdetritus">Patch Notes/Detritus</a></li>
+  <li><a href="#a-quick-and-dirty-introduction-to-control" id="toc-a-quick-and-dirty-introduction-to-control" class="nav-link active" data-scroll-target="#a-quick-and-dirty-introduction-to-control"><span class="header-section-number">8.1</span> A Quick and Dirty Introduction to Control</a></li>
+  <li><a href="#too-many-blocks" id="toc-too-many-blocks" class="nav-link" data-scroll-target="#too-many-blocks"><span class="header-section-number">8.2</span> Too Many Blocks!</a></li>
+  <li><a href="#the-singular-value-decomposition" id="toc-the-singular-value-decomposition" class="nav-link" data-scroll-target="#the-singular-value-decomposition"><span class="header-section-number">8.3</span> The Singular Value Decomposition</a></li>
   </ul>
 </nav>
     </div>
@@ -180,26 +177,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">System Dynamics</h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Auxiliary Topics</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Benjamin Aziel </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">July 2, 2023</p>
-    </div>
-  </div>
   
     
   </div>
@@ -207,29 +192,15 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="general-information" class="level1 unnumbered">
-<h1 class="unnumbered">General Information</h1>
-<p>This is a living document created from Markdown and executable code. Feel free to reach out if you find typos or have suggestions. It’s a passion project though, so my response time may vary.</p>
-<p><strong>My Email:</strong> benjamin.aziel@cooper.edu</p>
-<p><strong>Course Description:</strong> An introductory course to the mathematical modeling of systems. Topics include mechanical elements and systems, electric circuits and analogous systems, fluid elements and systems, analysis of systems using transfer functions, state space equations, analog simulation and digital simulation. Also covered are block diagrams, Laplace transforms, and linear system analysis. Computer projects will be assigned that will use MATLAB/Python.</p>
-<p><strong>Course Instructor:</strong> Dirk M. Luchtenburg (dirk.luchtenburg@cooper.edu)</p>
+<p>I don’t like having an appendix at the end for these topics. What I’m probably going to do instead is spread them out throughout the book and put an asterisk on “optional sections”. Ah well, content first!</p>
+<section id="a-quick-and-dirty-introduction-to-control" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="a-quick-and-dirty-introduction-to-control"><span class="header-section-number">8.1</span> A Quick and Dirty Introduction to Control</h2>
 </section>
-<section id="patch-notesdetritus" class="level1 unnumbered">
-<h1 class="unnumbered">Patch Notes/Detritus</h1>
-<p>To-Do:</p>
-<ul>
-<li>Replace all figures with acceptable alternatives</li>
-<li><span class="math inline">\(\S\)</span> 4.4</li>
-<li>Flesh out Chapter 6</li>
-<li>Finish Chapter 7</li>
-</ul>
-<p>Log:</p>
-<ul>
-<li><p>06.19.23 - Chapter 3 looks good</p></li>
-<li><p>06.06.23 - Chapter 2 looks good</p></li>
-<li><p>05.22.23 - Transplanted everything from the original LaTeX file here except for pictures. Some additional formatting changes needed, and a LOT of editing, but things look pretty good…</p></li>
-<li><p>05.18.23 - Made the jump from a LaTeX document on Github to Quarto at Prof.&nbsp;Luchtenburg’s recommendation. It’s pretty cool…can embed inline code and whatnot!</p></li>
-</ul>
+<section id="too-many-blocks" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="too-many-blocks"><span class="header-section-number">8.2</span> Too Many Blocks!</h2>
+</section>
+<section id="the-singular-value-decomposition" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="the-singular-value-decomposition"><span class="header-section-number">8.3</span> The Singular Value Decomposition</h2>
 
 
 </section>
@@ -585,11 +556,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./ch7.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Dynamic Behavior and Linear Systems</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ch1.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Course Motivation and Overview</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

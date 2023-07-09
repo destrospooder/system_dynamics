@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Benjamin Aziel">
-<meta name="dcterms.date" content="2023-07-02">
 
-<title>System Dynamics</title>
+<title>System Dynamics - 1&nbsp; Course Motivation and Overview</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ch1.html" rel="next">
+<link href="./ch2.html" rel="next">
+<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -64,8 +63,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -78,7 +75,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">General Information</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch1.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Course Motivation and Overview</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -108,13 +105,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">General Information</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch1.html" class="sidebar-item-text sidebar-link">
+  <a href="./ch1.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Course Motivation and Overview</span></span></a>
   </div>
 </li>
@@ -170,8 +167,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#general-information" id="toc-general-information" class="nav-link active" data-scroll-target="#general-information">General Information</a></li>
-  <li><a href="#patch-notesdetritus" id="toc-patch-notesdetritus" class="nav-link" data-scroll-target="#patch-notesdetritus">Patch Notes/Detritus</a></li>
+  <li><a href="#first-ramblings" id="toc-first-ramblings" class="nav-link active" data-scroll-target="#first-ramblings"><span class="header-section-number">1.1</span> First Ramblings</a></li>
+  <li><a href="#why-model" id="toc-why-model" class="nav-link" data-scroll-target="#why-model"><span class="header-section-number">1.2</span> Why Model?</a></li>
   </ul>
 </nav>
     </div>
@@ -180,26 +177,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">System Dynamics</h1>
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Course Motivation and Overview</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Benjamin Aziel </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">July 2, 2023</p>
-    </div>
-  </div>
   
     
   </div>
@@ -207,29 +192,21 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="general-information" class="level1 unnumbered">
-<h1 class="unnumbered">General Information</h1>
-<p>This is a living document created from Markdown and executable code. Feel free to reach out if you find typos or have suggestions. It’s a passion project though, so my response time may vary.</p>
-<p><strong>My Email:</strong> benjamin.aziel@cooper.edu</p>
-<p><strong>Course Description:</strong> An introductory course to the mathematical modeling of systems. Topics include mechanical elements and systems, electric circuits and analogous systems, fluid elements and systems, analysis of systems using transfer functions, state space equations, analog simulation and digital simulation. Also covered are block diagrams, Laplace transforms, and linear system analysis. Computer projects will be assigned that will use MATLAB/Python.</p>
-<p><strong>Course Instructor:</strong> Dirk M. Luchtenburg (dirk.luchtenburg@cooper.edu)</p>
+<section id="first-ramblings" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="first-ramblings"><span class="header-section-number">1.1</span> First Ramblings</h2>
+<p>The course is called Systems Engineering in the course catalog, but Prof.&nbsp;Luchtenburg calls it System Dynamics instead. It’s a more apt name for what the course actually covers; if you look up Systems Engineering you’ll find a completely different subject.</p>
+<p>The course text is Ogata’s <em>System Dynamics</em>, which doesn’t fit particularly well for the course. Most feedback control textbooks, like Nise, start with a few chapters covering dynamic modeling and response, but they tend not to be very in depth. I can provide PDFs if you can’t find them yourselves. Read the syllabus, it’s pretty in depth.</p>
+<p>Prof.&nbsp;Luchtenburg <em>should</em> put his notes up in the MS Teams Class Notebook and record his lectures (if he hasn’t given up using Microsoft Teams yet). Your mileage may vary if you don’t bother coming to class, though; the audio quality in the recordings isn’t that great and the notes can be less detailed than the lectures themselves.</p>
+<p>This document is a living document, which means I’ll continue editing it as I see fit. I reserve the right to include material that may not be covered in the course, but better prepares you for concepts that may seem like they come out-of-the-blue otherwise.</p>
+<p>I have this lousy habit of writing in the fourth person and cursing in my writing. Apologies in advance.</p>
 </section>
-<section id="patch-notesdetritus" class="level1 unnumbered">
-<h1 class="unnumbered">Patch Notes/Detritus</h1>
-<p>To-Do:</p>
-<ul>
-<li>Replace all figures with acceptable alternatives</li>
-<li><span class="math inline">\(\S\)</span> 4.4</li>
-<li>Flesh out Chapter 6</li>
-<li>Finish Chapter 7</li>
-</ul>
-<p>Log:</p>
-<ul>
-<li><p>06.19.23 - Chapter 3 looks good</p></li>
-<li><p>06.06.23 - Chapter 2 looks good</p></li>
-<li><p>05.22.23 - Transplanted everything from the original LaTeX file here except for pictures. Some additional formatting changes needed, and a LOT of editing, but things look pretty good…</p></li>
-<li><p>05.18.23 - Made the jump from a LaTeX document on Github to Quarto at Prof.&nbsp;Luchtenburg’s recommendation. It’s pretty cool…can embed inline code and whatnot!</p></li>
-</ul>
+<section id="why-model" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="why-model"><span class="header-section-number">1.2</span> Why Model?</h2>
+<p>To start off, let’s define a <strong>model</strong>. A mathematical model of a system is a set of differential equations that allows us to predict how a system behaves under different conditions. By creating a model, we can use equations and principles to describe a system’s present behavior, identify key parameters that affect the system, and make educated guesses as to how the system will behave in the future.</p>
+<p>You may have covered some rudimentary modeling in Ma111 or Ma240, where it was probably crammed in to satisfy those annoying kids that go “wHEN ARe we ever gOINg to usE tHIS iN ReAl LIfE”. The methods we’ll cover in this course will be more robust than simply going off a given formula.</p>
+<p>Something we’ll exploit heavily a lot in this course is the principle of <strong>analogical models</strong>, or generic representations of common physical phenomena. This turns out to be really useful because it provides a convenient and consistent way to represent and analyze complex systems that involve different types of “stuff”. Say you’re faced with a fluid flow system, and you haven’t taken a fluid mechanics course yet. Using methods introduced in this course, we will be able to convert this system into more familiar, yet equivalent, like a mass-spring system or a series circuit. Using these analogies allows us to apply the same concepts and mathematical tools to different types of systems, which can greatly simplify the analysis and design process.</p>
+<p>To conclude, modeling is a powerful tool that, if mastered, will allow you to understand, predict, and (as we’ll see in ME351 next semester) <strong>control</strong> the behavior of physical systems, and it has many practical applications in engineering, physics, and other fields.</p>
+<p>Don’t suck at it.</p>
 
 
 </section>
@@ -585,10 +562,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">General Information</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ch1.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Course Motivation and Overview</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./ch2.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The First Order</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

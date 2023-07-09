@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Benjamin Aziel">
-<meta name="dcterms.date" content="2023-07-02">
 
-<title>System Dynamics</title>
+<title>System Dynamics - 4&nbsp; An Engineering Student’s Butchering of Ma326</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ch1.html" rel="next">
+<link href="./ch5.html" rel="next">
+<link href="./ch3.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -78,7 +77,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">General Information</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch4.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">An Engineering Student's Butchering of Ma326</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -108,7 +107,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">General Information</span></a>
   </div>
 </li>
@@ -132,7 +131,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch4.html" class="sidebar-item-text sidebar-link">
+  <a href="./ch4.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">An Engineering Student’s Butchering of Ma326</span></span></a>
   </div>
 </li>
@@ -170,8 +169,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#general-information" id="toc-general-information" class="nav-link active" data-scroll-target="#general-information">General Information</a></li>
-  <li><a href="#patch-notesdetritus" id="toc-patch-notesdetritus" class="nav-link" data-scroll-target="#patch-notesdetritus">Patch Notes/Detritus</a></li>
+  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a></li>
+  <li><a href="#linearity-and-time-invariance" id="toc-linearity-and-time-invariance" class="nav-link" data-scroll-target="#linearity-and-time-invariance"><span class="header-section-number">4.1</span> Linearity and Time-Invariance</a></li>
+  <li><a href="#matrices-at-lightspeed" id="toc-matrices-at-lightspeed" class="nav-link" data-scroll-target="#matrices-at-lightspeed"><span class="header-section-number">4.2</span> Matrices, at Lightspeed</a></li>
+  <li><a href="#transposition-and-symmetry" id="toc-transposition-and-symmetry" class="nav-link" data-scroll-target="#transposition-and-symmetry"><span class="header-section-number">4.3</span> Transposition and Symmetry</a></li>
+  <li><a href="#invert-it-determineit" id="toc-invert-it-determineit" class="nav-link" data-scroll-target="#invert-it-determineit"><span class="header-section-number">4.4</span> Invert It! Determine…It!</a></li>
   </ul>
 </nav>
     </div>
@@ -180,26 +182,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">System Dynamics</h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">An Engineering Student’s Butchering of Ma326</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Benjamin Aziel </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">July 2, 2023</p>
-    </div>
-  </div>
   
     
   </div>
@@ -207,31 +197,150 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="general-information" class="level1 unnumbered">
-<h1 class="unnumbered">General Information</h1>
-<p>This is a living document created from Markdown and executable code. Feel free to reach out if you find typos or have suggestions. It’s a passion project though, so my response time may vary.</p>
-<p><strong>My Email:</strong> benjamin.aziel@cooper.edu</p>
-<p><strong>Course Description:</strong> An introductory course to the mathematical modeling of systems. Topics include mechanical elements and systems, electric circuits and analogous systems, fluid elements and systems, analysis of systems using transfer functions, state space equations, analog simulation and digital simulation. Also covered are block diagrams, Laplace transforms, and linear system analysis. Computer projects will be assigned that will use MATLAB/Python.</p>
-<p><strong>Course Instructor:</strong> Dirk M. Luchtenburg (dirk.luchtenburg@cooper.edu)</p>
+<section id="preface" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="preface">Preface</h2>
+<p>This chapter’s going to be a smorgasbord of mathematical concepts I think are foundational to understanding this course from a theoretical perspective. A decent chunk of it will be review from Ma110 and Ma240, but it doesn’t hurt to take a second look at these things (they keep coming back over and over). That being said, this chapter largely strays off from Prof.&nbsp;Luchtenburg’s curriculum, especially in the latter half of section 4.3.</p>
+<p>What I’ll try to do, instead of rehashing what you got out of Ma240, is reframe these concepts in a way that’s more applicable to this course (and ME351). I’ll also formalize a bunch of concepts from Ma326 that are really important to know for this class (and later on). But first, let’s formalize a few more definitions that will come in handy later on.</p>
+<p>A <strong>linear combination</strong> of elements of a set <span class="math inline">\(x_1, x_2, ..., x_n\)</span>, is given by:</p>
+<p><span class="math display">\[a_1 x_1 + a_2 x_2 + ... + a_n x_n \]</span></p>
+<p>where each <span class="math inline">\(a_i\)</span> is a constant. In layman’s terms, a linear combination of variables is the sum of scaled versions of those variables, where the scaling factor is a scalar.</p>
+<p>A set of variables are <strong>linearly dependent</strong> if one of the variables can be expressed as a linear combination of the others. More formally, a set of variables <span class="math inline">\(x_1, x_2, ..., x_n\)</span> is linearly dependent if there exist scalars <span class="math inline">\(a_1, a_2, ... a_n\)</span> (not all zero), such that:</p>
+<p><span class="math display">\[a_1 x_1 + a_2 x_2 + ... + a_n x_n = 0\]</span></p>
+<p>On the other hand, if no such scalars exist, the set of variables is said to be <strong>linearly independent</strong>.</p>
 </section>
-<section id="patch-notesdetritus" class="level1 unnumbered">
-<h1 class="unnumbered">Patch Notes/Detritus</h1>
-<p>To-Do:</p>
+<section id="linearity-and-time-invariance" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="linearity-and-time-invariance"><span class="header-section-number">4.1</span> Linearity and Time-Invariance</h2>
+<p>A is a mathematical model often used in control theory to describe the behavior of physical systems. It is characterized by two properties: linearity and time-invariance. I’ll describe these separately in the context of differential equations. A differential equation of the form:</p>
+<p><span class="math display">\[a_n y^{(n)} (t) + a_{n-1} y^{(n-1)} + ... + a_1 \dot{y}(t) + a_0 y(t) = f(t)\]</span></p>
+<p>where <span class="math inline">\(y^{(i)}\)</span> is the <span class="math inline">\(i\)</span>th derivative of <span class="math inline">\(y(t)\)</span>, is called . (The relationship between <span class="math inline">\(y(t)\)</span> and <span class="math inline">\(t\)</span> is a linear mapping.) A system is linear if and only if it satisfies two properties: superposition and homogeneity:</p>
 <ul>
-<li>Replace all figures with acceptable alternatives</li>
-<li><span class="math inline">\(\S\)</span> 4.4</li>
-<li>Flesh out Chapter 6</li>
-<li>Finish Chapter 7</li>
+<li><strong>Superposition</strong> - if <span class="math inline">\(x_1 \to y_1\)</span> and <span class="math inline">\(x_2 \to y_2\)</span>, then <span class="math inline">\(x_1 + x_2 \to y_1 + y_2\)</span></li>
+<li><strong>Homogeneity</strong> - if <span class="math inline">\(k\)</span> is a scalar and <span class="math inline">\(x \to y\)</span>, then <span class="math inline">\(kx \to ky\)</span></li>
 </ul>
-<p>Log:</p>
+<p>If <span class="math inline">\(\{a_i\}_0^n\)</span>, also called coefficients, are constants, the equation is also characterized as a differential equation. Physically, constant coefficients imply that the system behavior does not depend on time.</p>
+<p>We can establish an equivalence between linear constant coefficient equations and linear time-invariant systems. Time-invariance is the principle that if we chug an input <span class="math inline">\(t_0\)</span> into a system that outputs <span class="math inline">\(y(t_0)\)</span>, the input <span class="math inline">\(t_0 + t_1\)</span> will result in an output of <span class="math inline">\(y(t_0 + t_1)\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Let’s take a look at a few examples to make this more clear:</p>
+<p><span class="math display">\[\dot{y} + \sin(t) y = 0\]</span></p>
+<p>This system is not LTI, because the coefficient of <span class="math inline">\(y\)</span> is not constant. (More explicitly, it’s a function of <span class="math inline">\(t\)</span>, so as <span class="math inline">\(t \to \infty\)</span>, the behavior is affected.)</p>
+<p><span class="math display">\[2 \dot{y} + 3 y = 0\]</span></p>
+<p>This system <em>is</em> LTI, because the coefficients of each derivative of <span class="math inline">\(y\)</span> are constant.</p>
+<p><span class="math display">\[\dot{y} + \ln(y) = 0\]</span></p>
+<p>This system isn’t even linear, for obvious reasons.</p>
+<p>Examples of LTI systems include first-order passive filters, second order systems such as springs and masses, and many other linear systems in control theory and signal processing.</p>
+</section>
+<section id="matrices-at-lightspeed" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="matrices-at-lightspeed"><span class="header-section-number">4.2</span> Matrices, at Lightspeed</h2>
+<p>I truly hope you know what a matrix is by now. If not, fasten your seatbelt.</p>
+<p>A matrix is a rectangular array of numbers, of the form:</p>
+<p><span class="math display">\[\textbf{A} = \begin{bmatrix}
+    a_{11} &amp; a_{12} &amp; ... &amp; a_{1n}\\ a_{21} &amp; a_{22} &amp; ... &amp; a_{2n}\\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ a_{m1} &amp; a_{m2} &amp; ... &amp; a_{mn}
+\end{bmatrix}\]</span></p>
+<p>where <span class="math inline">\(a_{ij}\)</span> is the entry at row <span class="math inline">\(i\)</span> and column <span class="math inline">\(j\)</span>. We say a matrix is of size <span class="math inline">\(m \times n\)</span>, where <span class="math inline">\(m\)</span> is the number of rows and <span class="math inline">\(n\)</span> is the number of columns.</p>
+<p><span class="math display">\[\underbrace{\begin{bmatrix}
+    1 &amp; 2 \\ 3 &amp; 4 \\ 5 &amp; 6
+\end{bmatrix}
+}_{3\times 2}\]</span></p>
+<p>Matrices are pretty neat. We can add numbers in the matrix elementwise and scale it by a scalar factor as follows:</p>
+<p><span class="math display">\[\begin{bmatrix}
+    a_1 &amp; b_1 \\ c_1 &amp; d_1
+\end{bmatrix} + \begin{bmatrix}
+    a_2 &amp; b_2 \\ c_2 &amp; d_2
+\end{bmatrix} = \begin{bmatrix}
+    a_1 + a_2 &amp; b_1 + b_2 \\ c_1 + c_2 &amp; d_1 + d_2
+\end{bmatrix}\]</span></p>
+<p><span class="math display">\[ k \begin{bmatrix}
+    a &amp; b \\ c &amp; d
+\end{bmatrix} = \begin{bmatrix}
+    ka &amp; kb \\ kc &amp; kd
+\end{bmatrix}\]</span></p>
+<p>The <strong>zero matrix</strong> <strong>0</strong> is an <span class="math inline">\(m\times n\)</span> matrix with all entries 0. The zero matrix plays an important role in linear algebra, as it is the additive identity for matrices. This means that adding a zero matrix to any matrix does not change the matrix, much like adding zero to any number does not change its value.</p>
+<p>A <strong>square matrix</strong> is a matrix with the same number of rows and columns. Many concepts in linear algebra are designed with these in mind, such as determinants and eigenvalues.</p>
+<p>Next, we’ll tackle the <strong>Kronecker delta</strong>, which is is a useful and important symbol in mathematics, particularly in linear algebra and related fields. Its simple definition allows for the easy expression of many concepts and operations, making it a valuable tool for mathematicians and scientists. We define the Kronecker delta <span class="math inline">\(\delta_{ij}\)</span> as follows:</p>
+<p><span class="math display">\[\begin{equation*}
+    \delta_{ij} = \left\{ \begin{array}{ll}
+        1 \quad i=j\\
+        0 \quad i \neq j
+    \end{array} \right.
+\end{equation*}\]</span></p>
+<p>Following from this, the <strong>identity matrix</strong> <span class="math inline">\(\textbf{I}_n\)</span> is defined as an <span class="math inline">\(n\times n\)</span> square matrix where <span class="math inline">\((\textbf{I}_n)_{ij} = \delta_{ij}\)</span>, i.e.,</p>
+<p><span class="math display">\[\textbf{I}_1 = 1, \; \textbf{I}_2 = \begin{bmatrix}
+    1 &amp; 0 \\ 0 &amp; 1
+\end{bmatrix}, \; \textbf{I}_3 = \begin{bmatrix}
+    1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1
+\end{bmatrix}, \; ...\]</span></p>
+<p>The set of all matrices fixed at size <span class="math inline">\(m \times n\)</span> with scalar entries forms something we call a vector space. There’s a lot of nuance attached to that name; if you care about it, take Ma326. Here are a few properties for now. (Bolded quantities are matrices, <span class="math inline">\(a, b,\)</span> and 1 are scalars.)</p>
 <ul>
-<li><p>06.19.23 - Chapter 3 looks good</p></li>
-<li><p>06.06.23 - Chapter 2 looks good</p></li>
-<li><p>05.22.23 - Transplanted everything from the original LaTeX file here except for pictures. Some additional formatting changes needed, and a LOT of editing, but things look pretty good…</p></li>
-<li><p>05.18.23 - Made the jump from a LaTeX document on Github to Quarto at Prof.&nbsp;Luchtenburg’s recommendation. It’s pretty cool…can embed inline code and whatnot!</p></li>
+<li>Matrix addition is commutative, i.e., <span class="math inline">\(\textbf{X} + \textbf{Y} = \textbf{Y} + \textbf{X}\)</span></li>
+<li>Matrix addition is associative, i.e., <span class="math inline">\((\textbf{X} + \textbf{Y}) + \textbf{Z} = \textbf{X} + (\textbf{Y} + \textbf{Z})\)</span></li>
+<li>Each matrix has an additive identity, i.e., <span class="math inline">\(\textbf{X} + \textbf{0} = \textbf{X}\)</span></li>
+<li>Each matrix has an additive inverse, i.e., <span class="math inline">\(\textbf{X} + \textbf{Y} = \textbf{0}\)</span></li>
+<li>Each matrix has a scalar multiplicative identity, i.e., <span class="math inline">\(1 (\textbf{X}) = \textbf{X}\)</span></li>
+<li><span class="math inline">\((ab)\textbf{X} = a(b\textbf{X})\)</span></li>
+<li><span class="math inline">\(a(\textbf{X} + \textbf{Y}) = a\textbf{X} + a\textbf{Y}\)</span></li>
+<li><span class="math inline">\((a+b)\textbf{X} = a\textbf{X} + b\textbf{X}\)</span></li>
 </ul>
+<p>We can multiply two matrices of sizes <span class="math inline">\(m\times n\)</span> and <span class="math inline">\(n\times p\)</span>, respectively, to produce another matrix of size <span class="math inline">\(m\times p\)</span>. The operation, dubbed <strong>matrix multiplication</strong>, should not be confused with the scalar multiplication used before. It’s defined as follows:</p>
+<p><span class="math display">\[(\textbf{AB})_{ij} = \sum_{k=1}^n \textbf{A}_{ik} \textbf{B}_{kj}\]</span></p>
+<p>Finding the product of two matrices may look intimidating based off that formula, but it’s actually not that difficult once you understand the basic steps. First, you need to make sure that the matrices are compatible for multiplication. To do this, we need to ensure that the number of columns in the first matrix is the same as the number of rows in the second matrix. If they’re not the same, you can’t multiply them.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>Once you’ve determined that the matrices are compatible, you can start multiplying. To find each element in the product matrix, you need to multiply the corresponding row in the first matrix by the corresponding column in the second matrix. Specifically, for each element in the product matrix, you will:</p>
+<ul>
+<li>Take the row of the first matrix that corresponds to that element.</li>
+<li>Take the column of the second matrix that corresponds to that element.</li>
+<li>Multiply each corresponding pair of elements in the row and column.</li>
+<li>Add up all of the products you got in the last step.</li>
+</ul>
+<p>Keep doing this for every element in the product matrix until you’ve filled in all the entries. Here’s a brief example:</p>
+<p><span class="math display">\[\begin{bmatrix}
+    1 &amp; 2 &amp; 3 \\
+    4 &amp; 5 &amp; 6
+    \end{bmatrix}
+    \begin{bmatrix}
+    1 &amp; 2 \\
+    3 &amp; 4 \\
+    5 &amp; 6
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    1 \cdot 1 + 2 \cdot 3 + 3 \cdot 5 &amp; 1 \cdot 2 + 2 \cdot 4 + 3 \cdot 6 \\
+    4 \cdot 1 + 5 \cdot 3 + 6 \cdot 5 &amp; 4 \cdot 2 + 5 \cdot 4 + 6 \cdot 6\end{bmatrix} = \begin{bmatrix} 22 &amp; 28 \\ 49 &amp; 64 \end{bmatrix}\]</span></p>
+<p>Matrix products show up everywhere. They’re essential for fields like population modeling, network theory, signal processing, advanced dynamics, etc. Try to be as comfortable as possible with this operation before diving into the next chapter.</p>
+</section>
+<section id="transposition-and-symmetry" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="transposition-and-symmetry"><span class="header-section-number">4.3</span> Transposition and Symmetry</h2>
+<p>The <strong>transpose</strong> of an <span class="math inline">\(m\times n\)</span> matrix <span class="math inline">\(\textbf{A}\)</span> is the <span class="math inline">\(n\times m\)</span> matrix obtained by interchanging its rows and columns. It’s often denoted as <span class="math inline">\(\textbf{A}^\text{T}\)</span> or <span class="math inline">\(\textbf{A}^\text{t}\)</span>.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> In other words, the rows of the original matrix become columns in the transposed matrix, and the columns become rows.</p>
+<p><span class="math display">\[\textbf{A} = \begin{bmatrix} 1 &amp; 2 \\ 3 &amp; 4 \\ 5 &amp; 6 \end{bmatrix} \qquad \qquad \textbf{A}^\text{T} = \begin{bmatrix} 1 &amp; 3 &amp; 5 \\ 2 &amp; 4 &amp; 6 \end{bmatrix}\]</span></p>
+<p>Let’s follow up with a few more properties that involve transposition. (Bolded quantities are matrices, <span class="math inline">\(a, b\)</span> are scalars.)</p>
+<ul>
+<li><span class="math inline">\(\left(\textbf{X}^\text{T}\right)^\text{T} = \textbf{X}\)</span></li>
+<li><span class="math inline">\((\textbf{X}+\textbf{Y})^\text{T} = \textbf{X}^\text{T} + \textbf{B}^\text{T}\)</span></li>
+<li><span class="math inline">\(a\textbf{X}^\text{T} = (a\textbf{X})^\text{T}\)</span></li>
+<li><span class="math inline">\((\textbf{X}\textbf{Y})^\text{T} = \textbf{Y}^\text{T} \textbf{X}^\text{T}\)</span></li>
+</ul>
+<p>A <strong>symmetric matrix</strong> is a square matrix equal to its own transpose. (Another way to phrase this is: if <span class="math inline">\(\textbf{A}\)</span> is an <span class="math inline">\(n\times n\)</span> matrix, then <span class="math inline">\(\textbf{A}\)</span> is symmetric if and only if <span class="math inline">\(\textbf{A}^\text{T} = \textbf{A}\)</span>.)</p>
+<p>Trivially, the sum of two symmetric matrices is symmetric, and a scalar multiple of a symmetric matrix is symmetric.</p>
+<p>There’s other kinds of symmetry as well. For example, a <strong>skew-symmetric matrix</strong> is a square matrix equal to its negative. (Another way to phrase this is: if <span class="math inline">\(\textbf{A}\)</span> is an <span class="math inline">\(n\times n\)</span> matrix, then <span class="math inline">\(\textbf{A}\)</span> is skew-symmetric if and only if <span class="math inline">\(\textbf{A}^\text{T} = -\textbf{A}\)</span>.) This turns out to be <em>much</em> more interesting than its vanilla counterpart in dynamics, especially when dealing with concepts like inertial tensors and angular momentum.</p>
+<p>Again, trivially, the sum of two skew-symmetric matrices is symmetric, and a scalar multiple of a skew-symmetric matrix is symmetric. Additionally, you may realize that every entry on the diagonal of a skew-symmetric matrix must be equal to 0. (Otherwise, how would the definition work?)</p>
+<p>This factoid turns out to be crucial if we focus on the 3-space case, there are only three independent entries of a skew-symmetric matrix. We can define a skew-symmetric operator for vectors in 3-space skew() as follows:<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p><span class="math display">\[\text{skew}(\boldsymbol{x}) = \text{skew}((x_1, x_2, x_3)) = \begin{bmatrix} 0 &amp; -x_1 &amp; x_2 \\ x_1 &amp; 0 &amp; -x_3 \\ -x_2 &amp; x_3 &amp; 0\end{bmatrix} \]</span></p>
+<p>This operator comes with a really cool property:</p>
+<p><span class="math display">\[\text{skew}(\boldsymbol{x})^\text{T} = -\text{skew}(\boldsymbol{x})\]</span></p>
+<p>which comes in handy a lot in advanced dynamics. Additionally, we can make an alternative definition of the vector cross product.</p>
+<p><span class="math display">\[\boldsymbol{x} \times \boldsymbol{y} = \text{skew}(\boldsymbol{x}) \boldsymbol{y}\]</span></p>
+<p>Prove it! It’s kind of fun.</p>
+</section>
+<section id="invert-it-determineit" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="invert-it-determineit"><span class="header-section-number">4.4</span> Invert It! Determine…It!</h2>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>An equivalent definition in signal processing is that a system is time-invariant if it commutes with a “delay”.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This is a really great gut check when you’re finishing up a long calculation. If that matrix multiplication at the end of the problem is impossible, something must be up.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>I prefer the former notation and will be using it henceforth.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Yeah, you’ll see awful notation everywhere for this thing. I’m going to use skew() because why not.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
@@ -585,10 +694,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./ch3.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Our Second Order of Business</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ch1.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Course Motivation and Overview</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./ch5.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">A Mishmash of Modeling Concepts</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

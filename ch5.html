@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>System Dynamics - 5&nbsp; A Mishmash of Modeling Concepts</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./ch6.html" rel="next">
+<link href="./ch4.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch5.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">A Mishmash of Modeling Concepts</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">System Dynamics</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">General Information</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Course Motivation and Overview</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The First Order</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Our Second Order of Business</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">An Engineering Student’s Butchering of Ma326</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch5.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">A Mishmash of Modeling Concepts</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Frequency Response</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Dynamic Behavior and Linear Systems</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chaux.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Auxiliary Topics</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#preface---time-domain-modeling" id="toc-preface---time-domain-modeling" class="nav-link active" data-scroll-target="#preface---time-domain-modeling">Preface - Time Domain Modeling</a></li>
+  <li><a href="#the-state-space-approach" id="toc-the-state-space-approach" class="nav-link" data-scroll-target="#the-state-space-approach"><span class="header-section-number">5.1</span> The State-Space Approach</a></li>
+  <li><a href="#the-unit-impulse" id="toc-the-unit-impulse" class="nav-link" data-scroll-target="#the-unit-impulse"><span class="header-section-number">5.2</span> The Unit Impulse</a></li>
+  <li><a href="#preface---frequency-domain-prerequisites" id="toc-preface---frequency-domain-prerequisites" class="nav-link" data-scroll-target="#preface---frequency-domain-prerequisites">Preface - Frequency Domain Prerequisites</a></li>
+  <li><a href="#the-laplace-transform" id="toc-the-laplace-transform" class="nav-link" data-scroll-target="#the-laplace-transform"><span class="header-section-number">5.3</span> The Laplace Transform</a></li>
+  <li><a href="#its-convoluted" id="toc-its-convoluted" class="nav-link" data-scroll-target="#its-convoluted"><span class="header-section-number">5.4</span> It’s Convoluted!</a></li>
+  <li><a href="#transfer-functions-and-block-diagrams" id="toc-transfer-functions-and-block-diagrams" class="nav-link" data-scroll-target="#transfer-functions-and-block-diagrams"><span class="header-section-number">5.5</span> Transfer Functions and Block Diagrams</a></li>
+  <li><a href="#electrical-networks-and-impedance" id="toc-electrical-networks-and-impedance" class="nav-link" data-scroll-target="#electrical-networks-and-impedance"><span class="header-section-number">5.6</span> Electrical Networks and Impedance</a></li>
+  <li><a href="#intermezzo---discretization" id="toc-intermezzo---discretization" class="nav-link" data-scroll-target="#intermezzo---discretization">Intermezzo - Discretization</a></li>
+  <li><a href="#impulse-response" id="toc-impulse-response" class="nav-link" data-scroll-target="#impulse-response"><span class="header-section-number">5.7</span> Impulse Response</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">A Mishmash of Modeling Concepts</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="preface---time-domain-modeling" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="preface---time-domain-modeling">Preface - Time Domain Modeling</h2>
+<p>When we begin to analyze more complicated systems, it becomes less and less feasible to solve them analytically. As a result, we resort to setting up a system of differential equations rather than concatenating them into one as we’ve done in past chapters.</p>
+<p>The state-space representation of a system describes the system’s behavior over time in terms of a set of variables called <strong>states</strong>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The state variables represent the current conditions of the system, and their evolution over time is described by a set of first order differential equations called <strong>state equations</strong>.</p>
+<p>The state-space representation is a very powerful tool for modeling and analyzing physical systems, providing valuable insights into their behavior and enabling the development of control algorithms covered in ME351.</p>
+<p>An important thing to note is that the state-space representation of a system is not unique. In fact, an infinite number of representations exist for a physical system.</p>
+</section>
+<section id="the-state-space-approach" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="the-state-space-approach"><span class="header-section-number">5.1</span> The State-Space Approach</h2>
+<p>In the most general case, a state-state representation can be represented as the following:</p>
+<p><span class="math display">\[\begin{equation*}
+    \left\{ \begin{array}{ll}
+        \underline{\dot{x}} = \underline{f}(\underline{x}, \underline{u}) \\
+        \underline{y} = \underline{h}(\underline{x}, \underline{u})
+    \end{array} \right.
+\end{equation*}\]</span></p>
+<p>This might be a bit daunting at first, but it’s just a lot of fancy notation for a concept that’s pretty simple. <span class="math inline">\(\underline{x}\)</span> is the state, <span class="math inline">\(\underline{u}\)</span> is an input, and <span class="math inline">\(\underline{y}\)</span> is an output. Let’s drive this concept home with an example.</p>
+<p>Say we have a simple pendulum with length <span class="math inline">\(L\)</span> and a point mass <span class="math inline">\(m\)</span> at its end, as pictured below:</p>
+<p>For this problem, the mass of the rod (and any potential friction in the hinge) is ignored. The equation of motion of the pendulum can be derived by summing moments about the point of contact between the pendulum and the fixed surface.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Let’s call that point of contact <span class="math inline">\(O\)</span> for future bookkeeping purposes.</p>
+<p><span class="math display">\[\sum{M_O} = J_O \ddot{\theta}\]</span></p>
+<p>The moment arm for the weight <span class="math inline">\(mg\)</span> is the horizontal displacement <span class="math inline">\(L \sin(\theta)\)</span>, and <span class="math inline">\(J_O = mL^2\)</span> is the mass moment of inertia of the point mass <span class="math inline">\(m\)</span> about point <span class="math inline">\(O\)</span>. Let’s crunch some numbers.</p>
+<p><span class="math display">\[-mgL \sin(\theta) = mL^2 \ddot{\theta}\]</span> <span class="math display">\[mL^2 \ddot{\theta} + mgL \sin(\theta) = 0\]</span> <span class="math display">\[\ddot{\theta} + \frac{g}{L} \sin(\theta) = 0\]</span></p>
+<p>Now let’s try putting this in state-space form. First, we select the state vector, which should adhere to the following points:</p>
+<ul>
+<li>Pick state variables that include all the relevant information about the system you’re trying to model.</li>
+<li>The number of dimensions in the state vector should match the number of degrees of freedom of the system.</li>
+<li>The state vector should be <strong>minimal</strong>, meaning it should contain only the information necessary to describe the system, and not any redundant information. (Usually, the minimum number required is equal to the order of the differential equation that represents the system.)</li>
+<li>The components of the state vector must be linearly independent.</li>
+</ul>
+<p>A good rule of thumb is that the state should correspond with the initial conditions provided. We define states <span class="math inline">\(\theta\)</span> (angle) and <span class="math inline">\(\omega = \dot{\theta}\)</span> (angular velocity), and start constructing our state equations.</p>
+<p><span class="math display">\[\underline{x} = \begin{bmatrix}
+    \theta \\
+    \omega  \end{bmatrix} \qquad \qquad \underline{\dot{x}} = \begin{bmatrix}
+        \dot{\theta} \\
+        \dot{\omega}  \end{bmatrix}\]</span> <span class="math display">\[\underline{\dot{x}} = \underline{f} (\underline{x}, \underline{u})\]</span></p>
+<p><span class="math display">\[\dot{\underline{x}} = \begin{bmatrix}
+    \dot{\theta} \\
+    \dot{\omega}  \end{bmatrix} = \begin{bmatrix}
+    \omega \\
+    -\frac{g}{L} \sin(\theta)
+\end{bmatrix}\]</span></p>
+<p>We’ve turned a second order differential equation into two first order differential equations. Let’s move onto the second part of the representation: defining the output <span class="math inline">\(y\)</span>. We’re interested in the states’ behavior over time, so our output is…just the state vector <span class="math inline">\(\underline{x}\)</span>.</p>
+<p><span class="math display">\[\underline{y} = \underline{h}(\underline{x}, \underline{u}) = \underline{x} = \begin{bmatrix}
+    \theta \\
+    \omega  \end{bmatrix}\]</span></p>
+<p>These two components make up the state-space representation of this pendulum system. Putting it in this form makes it easier to numerically solve using tools like Python or MATLAB.</p>
+<p>A nonlinear solution can be unappealing, though perfectly valid. By using the small-angle approximation <span class="math inline">\(\sin(\theta) \sim \theta\)</span>, we can refine this representation further.</p>
+<p><span class="math display">\[\ddot{\theta} + \frac{g}{L} \sin(\theta) \sim \ddot{\theta} + \frac{g}{L} \theta = 0\]</span></p>
+<p>Our system is now an LTI system. Linearity is very nice, because we can use matrix multiplication to make this representation pretty.</p>
+<p><span class="math display">\[\dot{\underline{x}} = \begin{bmatrix}
+    \dot{\theta} \\
+    \dot{\omega}  \end{bmatrix} = \begin{bmatrix}
+    \omega \\
+    -\frac{g}{L} \theta
+\end{bmatrix} = \begin{bmatrix}
+    0 &amp; 1\\
+    -\frac{g}{L} &amp; 0
+\end{bmatrix} \begin{bmatrix}
+    \theta \\
+    \omega  \end{bmatrix}\]</span></p>
+<p>Let’s move onto the <strong>output equation</strong>, which is (in my opinion) less interesting than the state equation. What are we interested in analyzing here? Say we’re interested in analyzing <span class="math inline">\(\theta\)</span> - or more succinctly, <span class="math inline">\(y = \theta\)</span>.</p>
+<p><span class="math display">\[\underline{y} = \begin{bmatrix}
+    \theta \\
+    \omega  \end{bmatrix} = \begin{bmatrix}
+        1 &amp; 0
+    \end{bmatrix} \begin{bmatrix}
+        \theta \\
+        \omega  \end{bmatrix}\]</span></p>
+<p>Or, more interestingly, say we want to track both states over time (<span class="math inline">\(\theta\)</span> and <span class="math inline">\(\omega\)</span>). Our output is just the state, so we set <span class="math inline">\(y=\underline{x}\)</span>. In these cases, the “coefficient” matrix is the <span class="math inline">\(n\times n\)</span> identity matrix <span class="math inline">\(\textbf{I}_n\)</span>, where <span class="math inline">\(n\)</span> is the number of components in the state vector.</p>
+<p><span class="math display">\[\underline{y} = \begin{bmatrix}
+    \theta \\
+    \omega  \end{bmatrix} = \begin{bmatrix}
+        1 &amp; 0\\
+        0 &amp; 1
+    \end{bmatrix} \begin{bmatrix}
+        \theta \\
+        \omega  \end{bmatrix} = \textbf{I}_2 \begin{bmatrix}
+            \theta \\
+            \omega  \end{bmatrix}\]</span></p>
+<p>We’ll move on using this output equation. Let’s make this more complicated by saying the pendulum has an input applied torque <span class="math inline">\(T\)</span>, and the new equation of motion is:</p>
+<p><span class="math display">\[\ddot{\theta} + \frac{g}{L} \theta = \frac{T}{mL^2}\]</span></p>
+<p>Our revised state-space representation would be:</p>
+<p><span class="math display">\[\dot{\underline{x}} = \begin{bmatrix}
+    \dot{\theta} \\
+    \dot{\omega}  \end{bmatrix} = \begin{bmatrix}
+    \omega \\
+    -\frac{g}{L} \theta + \frac{T}{mL^2}
+\end{bmatrix} = \begin{bmatrix}
+    0 &amp; 1\\
+    -\frac{g}{L} &amp; 0
+\end{bmatrix} \begin{bmatrix}
+    \theta \\
+    \omega  \end{bmatrix} + \begin{bmatrix}
+        0 \\
+        \frac{1}{mL^2}  \end{bmatrix} T = \begin{bmatrix}
+            0 &amp; 1\\
+            -\frac{g}{L} &amp; 0
+        \end{bmatrix} \underline{x} + \begin{bmatrix}
+                0 \\
+                \frac{1}{mL^2}  \end{bmatrix} u\]</span> <span class="math display">\[\underline{y} = \begin{bmatrix}
+    \theta \\
+    \omega  \end{bmatrix} = \begin{bmatrix}
+        1 &amp; 0\\
+        0 &amp; 1
+    \end{bmatrix} \begin{bmatrix}
+        \theta \\
+        \omega  \end{bmatrix} + \begin{bmatrix}
+            0 \\
+            0  \end{bmatrix} T = \begin{bmatrix}
+                1 &amp; 0\\
+                0 &amp; 1
+            \end{bmatrix} \underline{x} + \begin{bmatrix}
+                    0 \\
+                    0  \end{bmatrix} u\]</span></p>
+<p>Using this example, we now extract the general form of the state-space representation of a linear system. A linear system is represented in state space by the following equations:</p>
+<p><span class="math display">\[\underline{\dot{x}} = \textbf{A} \underline{x} + \textbf{B} \underline{u}\]</span></p>
+<p><span class="math display">\[\underline{y} = \textbf{C} \underline{x} + \textbf{D} \underline{u}\]</span></p>
+<p>for <span class="math inline">\(t \ge t_0\)</span>, <span class="math inline">\(\underline{x}(t_0)\)</span>, where:</p>
+<ul>
+<li><span class="math inline">\(\underline{x}\)</span> is the state vector, of size <span class="math inline">\(n \times 1\)</span></li>
+<li><span class="math inline">\(\underline{y}\)</span> is the output vector, of size <span class="math inline">\(q \times 1\)</span></li>
+<li><span class="math inline">\(\underline{u}\)</span> is the input vector, of size <span class="math inline">\(p \times 1\)</span></li>
+<li><span class="math inline">\(\textbf{A}\)</span> is the system matrix, of size <span class="math inline">\(n \times n\)</span></li>
+<li><span class="math inline">\(\textbf{B}\)</span> is the input matrix, of size <span class="math inline">\(n \times p\)</span></li>
+<li><span class="math inline">\(\textbf{C}\)</span> is the output matrix, of size <span class="math inline">\(q \times n\)</span></li>
+<li><span class="math inline">\(\textbf{D}\)</span> is the feedforward matrix, of size <span class="math inline">\(q \times p\)</span></li>
+</ul>
+<p>Let’s try another example, this time a translational mechanical system. Block 1 of mass <span class="math inline">\(m\)</span> is attached to a fixed wall by dashpot with damping coefficient <span class="math inline">\(b\)</span>. Block 2, also of mass <span class="math inline">\(m\)</span>, is attached to block 1 by a spring of spring constant <span class="math inline">\(k\)</span>. Gravity is turned off.</p>
+<p>First, we write the equations of motion of the network. (Just draw a free body diagram around each mass and don’t fuck up your signs.)</p>
+<blockquote class="blockquote">
+<p>You want a hint? Newton guy.</p>
+<p>Prof.&nbsp;Luchtenburg</p>
+</blockquote>
+<p><span class="math display">\[m \ddot{q_1} + b \dot{q_1} + k q_1 - k q_2 = 0\]</span> <span class="math display">\[-kq_1 + m \ddot{q_2} + k q_2 = f(t)\]</span></p>
+<p>This is a system of two second order differential equations, so we’ll pick four states. We select our <span class="math inline">\(q_1\)</span>, <span class="math inline">\(\dot{q_1}\)</span>, <span class="math inline">\(q_2\)</span>, and <span class="math inline">\(\dot{q_2}\)</span> to be our four state variables, because we’re analyzing the kinematic behavior of two masses obeying Newton’s second law (N2L is a second order differential equation, which requires two initial conditions, and since there’s two masses to analyze we have four).</p>
+<p>Our first two state equations are easy: just define the derivatives. We get the other two by rearranging the equations of motion and isolating <span class="math inline">\(\ddot{q_1}\)</span> and <span class="math inline">\(\ddot{q_2}\)</span>.</p>
+<p><span class="math display">\[\dot{\underline{x}} = \begin{bmatrix}
+    \dot{q_1} \\
+    \ddot{q_1} \\
+    \dot{q_2} \\
+    \ddot{q_2}
+  \end{bmatrix} = \begin{bmatrix}
+    0 &amp; 1 &amp; 0 &amp; 0\\
+    -\frac{k}{m} &amp; -\frac{b}{m} &amp; \frac{k}{m} &amp; 0 \\
+    0 &amp; 0 &amp; 0 &amp; 1\\
+    \frac{k}{m} &amp; 0 &amp; -\frac{k}{m} &amp; 0
+\end{bmatrix} \begin{bmatrix}
+    q_1 \\
+    \dot{q_1} \\
+    q_2 \\
+    \dot{q_2} \end{bmatrix} + \begin{bmatrix}
+        0 \\
+    0 \\
+    0 \\
+    \frac{1}{m} \end{bmatrix} f(t)\]</span></p>
+<p>Now, we didn’t specify what output we wanted, but let’s say we want to analyze the velocity of the second mass, or <span class="math inline">\(\dot{q_2}\)</span>. We’d do the following:</p>
+<p><span class="math display">\[y = \begin{bmatrix} 0 &amp; 0 &amp; 0 &amp; 1\end{bmatrix} \begin{bmatrix}
+    q_1 \\
+    \dot{q_1} \\
+    q_2 \\
+    \dot{q_2} \end{bmatrix} + \begin{bmatrix} 0 \end{bmatrix} f(t)\]</span></p>
+<p>which is equivalent to the expression <span class="math inline">\(y = \dot{q_2}\)</span>. Even though it seems more complicated to put it in this form, it provides us with a <span class="math inline">\(\textbf{C}\)</span> and <span class="math inline">\(\textbf{D}\)</span> matrix, which is invaluable when analyzing systems computationally.</p>
+<p>What makes this example more significant than the previous one is that there’s now two different “entities” to analyze.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Rather than just analyzing multiple states (position, velocity) of a singular entity like we did with the pendulum, we’re now taking a look at the position and velocity of <em>two</em> masses. That’s kind of nifty, I think.</p>
+</section>
+<section id="the-unit-impulse" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="the-unit-impulse"><span class="header-section-number">5.2</span> The Unit Impulse</h2>
+<p><em>THWACK!</em></p>
+<p>You hear that? It’s the sound of Prof.&nbsp;Baglione smacking something with an impact hammer, a tool used to simultaneously excite something and measure the impact force at the same time.</p>
+<p>It’s really common in mechanical (and electrical, ugh) scenarios to want to analyze a very large force over a very short period of time. Say we’re interested in modeling a batter’s hit, a car crash, or…I don’t know…whacking a mass-spring system with an impact hammer.</p>
+<p>Consider a model of a hammer strike, pictured as follows.</p>
+<p>This strike is modeled as a rectangular “pulse”, where the rule is:</p>
+<p><span class="math display">\[F(t) = \begin{cases}
+    0 &amp; \text{if } t \leq t_0 - \epsilon \\
+    \frac{F_0}{2\epsilon} &amp; \text{if } t_0 - \epsilon &lt; t &lt; t_0 + \epsilon \\
+    0 &amp; \text{if } t \ge t_0 + \epsilon
+\end{cases}\]</span></p>
+<p>When integrated over time, <span class="math inline">\(F(t)\)</span> yields the <strong>impulse</strong> over <span class="math inline">\(F\)</span>.</p>
+<p><span class="math display">\[\text{Imp} = \int_{0^-}^{\infty} F(t) \, dt = \int_{t_0 - \epsilon}^{t_0 + \epsilon} \frac{F_0}{2\epsilon} \, dt = \frac{F_0}{2\epsilon} \left((t_0 + \epsilon)-(t_0 - \epsilon)\right) = F_0\]</span></p>
+<p>This trick of “ripping out the integrand” only works when <span class="math inline">\(\epsilon \neq 0\)</span>. Nevertheless, we investigate the case where <span class="math inline">\(\epsilon \to 0\)</span>.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p>As <span class="math inline">\(\epsilon\)</span> gets smaller and smaller, the magnitude of force <span class="math inline">\(\frac{F_0}{2\epsilon}\)</span> gets larger and larger. Nevertheless, the impulse remains equal to <span class="math inline">\(F_0\)</span>. We define the <strong>impulse function</strong> as a function <span class="math inline">\(F(t)\)</span> with the following two properties:</p>
+<p><span class="math display">\[F(t-t_0)=0, \; \; t\neq t_0 \qquad \qquad \int_{0^-}^\infty F(t) \, dt = F_0\]</span></p>
+<p>We call an impulse function where <span class="math inline">\(F_0 = 1\)</span> the <strong>unit impulse function</strong>, also called the <strong>Dirac delta function</strong>, denoted <span class="math inline">\(\delta(t)\)</span>.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> Let’s rewrite the above principles for the unit impulse.</p>
+<p><span class="math display">\[\delta(t-t_0)=0, \; \; t\neq t_0 \qquad \qquad \int_{0^-}^\infty \delta(t) \, dt = 1\]</span></p>
+<p>It’s important to realize that the unit impulse function…well…isn’t a function. The idea of a “function” that is equal to 0 everywhere except <span class="math inline">\(t=t_0\)</span>, where it’s equal to <span class="math inline">\(\infty\)</span> is preposterous! Additionally, for this “function” to make sense, the integral would be equal to 0.</p>
+<p><strong>We don’t care. We defined it that way.</strong><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<p>There exists an alternative definition of the unit impulse used in signal processing (that will also end up useful later on in this course).</p>
+<p><span class="math display">\[\int_{0^-}^\infty \delta(t-t_0) f(t)\, dt = f(t_0)\]</span></p>
+<p>where <span class="math inline">\(f\)</span> is a continuous function. This is called the <strong>sifting property</strong> of the unit impulse function. The unit impulse function acts as a sampler; the juicy part of <span class="math inline">\(\delta(t-t_0)\)</span> is located at <span class="math inline">\(t=t_0\)</span>, so integrating the product of the impulse <span class="math inline">\(\delta(t-t_0)\)</span> and a continuous function <span class="math inline">\(f(t)\)</span> yields <span class="math inline">\(f(t_0)\)</span>.</p>
+</section>
+<section id="preface---frequency-domain-prerequisites" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="preface---frequency-domain-prerequisites">Preface - Frequency Domain Prerequisites</h2>
+<p>While using the state-space representation of a system can be advantageous in situations where we have multiple inputs and multiple outputs, sometimes the linear algebra just gets too unwieldy, especially if you don’t have Python or MATLAB sitting in front of you. (This isn’t to say that transfer functions aren’t easily implementable in Python or MATLAB, though.)</p>
+<p>In lieu of modeling in the time domain, we can use <strong>transfer functions</strong> to mathematically model systems in the frequency domain. This ends up being really useful in ME351 when we talk about how to control physical systems rather than just analyzing them. Transfer functions are also much easier to translate into graphical interpretations of systems, like Bode plots.</p>
+</section>
+<section id="the-laplace-transform" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="the-laplace-transform"><span class="header-section-number">5.3</span> The Laplace Transform</h2>
+<p>You’ve likely brushed upon Laplace transforms in Ma240, so I’ll try to reintroduce them…err…less formally.</p>
+<p>The Laplace transform is an essential tool for analyzing and designing control systems, making them a vital topic to cover in preparation for ME351. By learning about Laplace transforms, we can develop a deep understanding of the behavior of dynamic systems and how to control them.</p>
+<p>Laplace transforms allow us to simplify differential equations that describe the behavior of a system in the time-domain, into simpler algebraic equations in the <span class="math inline">\(s\)</span>-domain. These equations can be easily analyzed to determine important system characteristics such as stability, steady-state error, and transient response.</p>
+<p>Furthermore, understanding Laplace transforms is crucial for designing controllers that can effectively control the behavior of a system. For example, by using Laplace transforms to analyze a system’s frequency response, engineers can design controllers that attenuate unwanted frequencies, leading to more desirable system performance.</p>
+<p>Let’s cut to the chase. The (one-sided) Laplace transform of a function <span class="math inline">\(f(t)\)</span> is a new function <span class="math inline">\(F(s)\)</span>, <span class="math inline">\(s \in \mathbb{C}\)</span>, defined by:<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> <span class="math display">\[ \mathcal{L} \{ f(t) \} = F(s) = \int_{0^-} ^\infty e^{-st} f(t) dt \]</span></p>
+<p>As the Laplace transform is an integral transform, we know that it is linear. Thus, taking the Laplace transform of a linear combination of functions yields a linear combination of the Laplace transforms of the functions:</p>
+<p><span class="math display">\[\mathcal{L} \{ \alpha f(t) + \beta g(t) \} = \mathcal{L} \{ \alpha f(t) \} + \mathcal{L} \{ \beta g(t) \} = \alpha \mathcal{L} \{ f(t) \} + \beta \mathcal{L} \{ g(t) \} = \alpha F(s) + \beta G(s)\]</span></p>
+<p>where <span class="math inline">\(\alpha, \,\beta\)</span> are constants. Here are a few common ones (easily verifiable with the integral definition).</p>
+<p><span class="math display">\[\mathcal{L} \{ \delta(t) \} = 1\]</span> <span class="math display">\[\mathcal{L} \{ 1 \} = \frac{1}{s}\]</span> <span class="math display">\[\mathcal{L} \{ e^{at} \} = \frac{1}{s-a}\]</span></p>
+<p>Confirm them yourself! (Or find a table of Laplace transforms, I don’t know…)</p>
+<p>Our objective is to use the Laplace transform to model physical systems. Thus, it is imperative that we find a way to take the Laplace transform of a derivative. Provided <span class="math inline">\(f\)</span> and its derivatives are continuous from <span class="math inline">\(0 \le t &lt; \infty\)</span>, and are of exponential order,<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> we do so as follows:</p>
+<p><span class="math display">\[\mathcal{L} \left \{\frac{df(t)}{dt} \right \} = \int_{0^-} ^\infty e^{-st} \frac{df(t)}{dt} dt = \left[ e^{-st} f(t) \right]_{0^-}^{\infty} - \int_{0^-} ^\infty -s e^{-st} f(t) dt = -f(0) + sF(s)\]</span></p>
+<p>or:</p>
+<p><span class="math display">\[\mathcal{L} \left \{ \frac{df(t)}{dt} \right \} = sF(s) - f(0)\]</span></p>
+<p>By recursion, it is apparent that the Laplace transform of a second derivative is:</p>
+<p><span class="math display">\[\mathcal{L} \left \{\frac{d^2f(t)}{dt^2} \right \} = sF'(s) - f'(0)= s(sF(s) - f(0)) - f'(0) = s^2 F(s) - sf(0) - f'(0)\]</span></p>
+<p>and an <span class="math inline">\(n\)</span>th derivative is:</p>
+<p><span class="math display">\[\mathcal{L} \left \{\frac{d^n f(t)}{dt^n} \right \} = s^n F(s) - s^{n-1} f(0) - s^{n-2} f'(0) - ...- s f^{(n-2)}(0) - f^{(n-1)} (0)\]</span></p>
+<p>In the case that all initial conditions are zero, it’s valid to write:</p>
+<p><span class="math display">\[\mathcal{L} \left\{\frac{d^n f(t)}{dt^n}\right\} = s^n F(s)\]</span></p>
+<p>This will be handy very soon.</p>
+<p>Finally, we’ll introduce the notion of the <strong>inverse Laplace transform</strong>, which transforms an expression in the <span class="math inline">\(s\)</span>-domain back into the time domain.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> More concisely:</p>
+<p><span class="math display">\[\mathcal{L}^{-1} \left\{F(s)\right\} = f(t)\]</span></p>
+<p>The inverse Laplace transform is also a linear transformation. Notably, it’s not unique; there exist distinct <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> such that <span class="math inline">\(\mathcal{L} \left\{f \right\} = \mathcal{L} \left\{g \right\}\)</span>.</p>
+<p>Using the technology we’ve formalized<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> thus far, we can use the Laplace transform to solve initial value problems. Say we wanted to solve the IVP:</p>
+<p><span class="math display">\[\ddot{y} - 4\dot{y} + 3 y = e^{2t}\]</span></p>
+<p>where <span class="math inline">\(y\)</span> is a function of <span class="math inline">\(t\)</span>, and <span class="math inline">\(y(0) = \dot{y}(0) = 0\)</span>. First, we transform the whole equation into the <span class="math inline">\(s\)</span>-domain.</p>
+<p><span class="math display">\[s^2 Y - 4 sY + 3 Y = \frac{1}{s-2}\]</span></p>
+<p>Since our objective is to solve for <span class="math inline">\(y(t)\)</span>, it’s wise to isolate <span class="math inline">\(Y(s)\)</span> on one side, so when we take the inverse Laplace transform, we immediately have an explicit formula <span class="math inline">\(y\)</span>.</p>
+<p><span class="math display">\[Y (s^2 - 4 s + 3) = \frac{1}{s-2}\]</span> <span class="math display">\[Y = \frac{1}{(s-2)(s^2 - 4 s + 3)}\]</span></p>
+<p>We then find the partial fraction decomposition of this rational function, so that transforming back to the time domain is easier. <a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a></p>
+<p><span class="math display">\[Y = -\left(\frac{1}{s-2} \right) + \frac{1}{2}\left(\frac{1}{s-1} \right) + \frac{1}{2}\left(\frac{1}{s-3}\right)\]</span></p>
+<p>And finally, we transform back.</p>
+<p><span class="math display">\[y = -e^{2t} + \frac{1}{2} e^{t} + \frac{1}{2} e^{3t}\]</span></p>
+<p>which matches whatever we’d get if we tried using a time domain method like the method of undetermined coefficients. Of course, we did a problem with zero initial conditions, but rest assured, if your goal is just to solve differential equations, we can consider cases with nonzero initial conditions as well.</p>
+</section>
+<section id="its-convoluted" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="its-convoluted"><span class="header-section-number">5.4</span> It’s Convoluted!</h2>
+<p>But what if we wanted to find the Laplace transform of an <em>integral</em>?</p>
+<p><strong>Convolution</strong> is an operation that generates a function from two other piecewise continuous functions. We define the convolution <span class="math inline">\(f \ast g\)</span> of functions <span class="math inline">\(f(t)\)</span> and <span class="math inline">\(g(t)\)</span> as follows:</p>
+<p><span class="math display">\[f(t) \ast g(t) = \int_0^t f(\tau) g(t-\tau) \, d\tau = \int_0^t f(t-\tau) g(\tau) \, d\tau\]</span></p>
+<p>So what makes this operation special? The Laplace transform of the convolution <span class="math inline">\(f(t) \ast g(t)\)</span> is equal to the product of the Laplace transform of <span class="math inline">\(f(t)\)</span> and <span class="math inline">\(g(t)\)</span>.</p>
+<p><span class="math display">\[\mathcal{L} \left\{f\ast g \right\} = \mathcal{L} \left\{f(t) \right\} \mathcal{L} \left\{g(t) \right\} = F(s) G(s)\]</span></p>
+<p>Or alternatively:</p>
+<p><span class="math display">\[\mathcal{L}^{-1} \left\{F(s) G(s) \right\} = f \ast g\]</span></p>
+<p>So in the case that <span class="math inline">\(g(t) = 1\)</span>, the Laplace transform of the integral of <span class="math inline">\(f(t)\)</span> is:</p>
+<p><span class="math display">\[\mathcal{L} \left\{\int_0^t f(\tau) d\tau \right\} = \frac{F(s)}{s}\]</span></p>
+</section>
+<section id="transfer-functions-and-block-diagrams" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="transfer-functions-and-block-diagrams"><span class="header-section-number">5.5</span> Transfer Functions and Block Diagrams</h2>
+<p>When possible, we try to think of all systems as black boxes with an input and an output. We’ve covered how to represent a system in the time domain using the state-space representation. Let’s try something else.</p>
+<p><strong>Transfer functions</strong> are often preferred over state space representations in certain situations because they are simple and easy to work with, especially for linear systems with a single input and a single output. They can be easily manipulated using some algebra and can be used to compute a system’s response to various input signals.</p>
+<p>Transfer functions are also very useful for frequency-domain analysis, such as calculating the system’s frequency response or designing filters to tweak the system’s frequency characteristics.</p>
+<p>Mathematically, a transfer function is the ratio of the Laplace transform of the output of a system <span class="math inline">\(Y(s)\)</span> to the Laplace transform of its input <span class="math inline">\(U(s)\)</span>, with all initial conditions assumed to be zero. The transfer function is typically denoted as <span class="math inline">\(H(s)\)</span>, where:</p>
+<p><span class="math display">\[H(s) = \frac{Y(s)}{U(s)}\]</span></p>
+<p>That’s all there is to it. Let’s try a variation of the system we tackled before.</p>
+<p><span class="math display">\[\ddot{y} - 4 \dot{y} + 3y = u\]</span></p>
+<p>So instead of that exponential expression on the right side of the equation, we now have an arbitrary input <span class="math inline">\(u(t)\)</span>. Because we’re trying to find the transfer function, we assume zero initial conditions and take the Laplace transform of everything.</p>
+<p><span class="math display">\[s^2 Y - 4 s Y + 3Y = U\]</span></p>
+<p>Then, we find <span class="math inline">\(H\)</span>.</p>
+<p><span class="math display">\[H = \frac{Y}{U} = \frac{1}{s^2 - 4s + 3}\]</span></p>
+<p>Using this transfer function, we can find the system response to any input we want. Say we’re interested in the response to a step input <span class="math inline">\(u_s(t)\)</span>. We can retrofit the definition of a transfer function to solve for the system response.</p>
+<p><span class="math display">\[Y = H U\]</span></p>
+<p>In this scenario, <span class="math inline">\(U\)</span> is the Laplace transform of <span class="math inline">\(u_s(t)\)</span>, or <span class="math inline">\(\frac{1}{s}\)</span>.</p>
+<p><span class="math display">\[Y = \frac{1}{s^3 - 4s^2 + 3s}\]</span></p>
+<p>which is left to complete as an exercise to the reader.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
+<p>Ah, one more thing! The roots of the numerator of the transfer function are called the <span class="math inline">\(zeroes\)</span> of the system, and the roots of the denominator of the transfer function are called the <span class="math inline">\(poles\)</span>. These definitions are consistent with the definitions we established earlier in the course.</p>
+<p>This seems like as good a time as any to introduce the concept of a <strong>block diagram</strong>, or a visual representation of a system, using blocks and arrows to break down components. We literally represent components as black boxes, without regard for whatever’s going on inside. All that matters is what comes in and what goes out. Seems perfect for a transfer function.</p>
+<p>Here’s a block diagram. <span class="math inline">\(U\)</span> is our input signal, <span class="math inline">\(Y\)</span> is the output signal, and <span class="math inline">\(H\)</span> is the transfer function representation of the system. When a signal enters a system in a block diagram, the output signal will be the product of the signal and the system’s transfer function.</p>
+<p>We can use additional tools of block diagram algebra to simplify and manipulate these diagrams, which ends up being vital when we start introducing feedback control into the mix.</p>
+</section>
+<section id="electrical-networks-and-impedance" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="electrical-networks-and-impedance"><span class="header-section-number">5.6</span> Electrical Networks and Impedance</h2>
+<p>In ESC221, you may have covered the series RLC circuit, pictured as follows:</p>
+<p>where the source voltage <span class="math inline">\(V_s\)</span> is the input of the system and the voltage across the capacitor <span class="math inline">\(V_c\)</span> is the output. The governing equation of this system is a second order differential equation, but using transfer functions, we can turn this differential equation into an algebraic one.</p>
+<p>This is especially advantageous when conducting an alternating current (AC) analysis of the network, when <span class="math inline">\(V_s\)</span> could be a sinusoidal function. However, the formulation described in this course is applicable to any input signal.</p>
+<p>The <strong>impedance</strong> <span class="math inline">\(Z\)</span> of a two-terminal passive component like a resistor, capacitor, or inductor, is defined as the ratio of the Laplace transform of the voltage <span class="math inline">\(\tilde{V}\)</span> to the Laplace transform of the current <span class="math inline">\(\tilde{I}\)</span>.</p>
+<p>Ohm’s law states that <span class="math inline">\(V = IR\)</span>. When we take the Laplace transform of the expression, we get:</p>
+<p><span class="math display">\[\tilde{V} = \tilde{I} R\]</span></p>
+<p>Thus, the impedance of a resistor is:</p>
+<p><span class="math display">\[Z_R = \frac{\tilde{V}}{\tilde{I}} = R\]</span></p>
+<p>That was…anticlimactic. Let’s try a capacitor next. The capacitive relationship states that <span class="math inline">\(q = \int I \, dt = CV\)</span>. When we take the Laplace transform of the expression, we get:</p>
+<p><span class="math display">\[\frac{1}{s} \tilde{I} = C\tilde{V}\]</span></p>
+<p>Thus, the impedance of a capacitor is:</p>
+<p><span class="math display">\[Z_C = \frac{\tilde{V}}{\tilde{I}} = \frac{1}{sC}\]</span></p>
+<p>That’s more interesting. Finally, the inductive relationship states that <span class="math inline">\(V = L\frac{dI}{dt}\)</span>. Again, Laplace transform:</p>
+<p><span class="math display">\[\tilde{V} = s L\tilde{I}\]</span></p>
+<p>and the impedance of an inductor is:</p>
+<p><span class="math display">\[Z_L = \frac{\tilde{V}}{\tilde{I}} = sL\]</span></p>
+<p>Here’s a bit more context - think of impedance as the frequency domain “value” of a passive component. Complex resistance, if you will. Resistance is real, so there’s no reason impedance is different in the Laplace’d analog of Ohm’s law.</p>
+<p>Relatedly, for a direct current (DC) circuit, <span class="math inline">\(s=0\)</span>.</p>
+<p>Let’s take a look at the circuit again. The governing equation, found using Kirchhoff’s voltage law, is:</p>
+<p><span class="math display">\[V_s - RI - L \frac{dI}{dt} - V_c = 0\]</span></p>
+<p>Using these newfound impedances, we can immediately convert this system to a transfer function. Let’s Laplace the shit out of this thing. (Keep in mind that a transfer function is output over input.)</p>
+<p><span class="math display">\[\tilde{V_s} - \tilde{I} (Z_R + Z_L + Z_C) = 0\]</span> <span class="math display">\[\tilde{V_s} - \tilde{I} (R + sL + \frac{1}{sC}) = 0\]</span> <span class="math display">\[U = \tilde{V_s} = \frac{\tilde{I}}{R + sL + \frac{1}{sC}}\qquad \qquad Y = \tilde{V_c} = \frac{\tilde{I}}{sC}\]</span> <span class="math display">\[\frac{Y}{U} = \frac{\frac{\tilde{I}}{sC}}{\frac{\tilde{I}}{R + sL + \frac{1}{sC}}} = \frac{s^2 CL + sCR + 1}{s^2 C^2}\]</span></p>
+<p>We can expand this idea to more than just passive components.<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a> Impedance is a reliable method for thinking about mechanical systems as well (such as mass-spring systems, systems involving gears, motors, etc.)</p>
+<p>The pigeonhole here is that these systems are modeled as linear. The frequency domain does not translate well when we study nonlinear systems; instead, we tend to use more qualitative methods such as drawing phase portraits or bifurcation analysis.</p>
+</section>
+<section id="intermezzo---discretization" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="intermezzo---discretization">Intermezzo - Discretization</h2>
+<p>Let’s take a look at a first order continuous system.</p>
+<p><span class="math display">\[\tau \dot{y} + y = Ku\]</span></p>
+<p>We can discretize this system by using finite differences in lieu of derivatives. At time <span class="math inline">\(t_k\)</span>, we can approximate the derivative <span class="math inline">\(\dot{y}(t_k)\)</span> as follows:</p>
+<p><span class="math display">\[\dot{y}(t_k) \approx \frac{y(t_k) - y(t_{k-1})}{t_k - t_{k-1}}\]</span></p>
+<p>Plugging in, we get:</p>
+<p><span class="math display">\[\tau \frac{y(t_k) - y(t_{k-1})}{t_k - t_{k-1}} + y(t_{k-1}) = Ku(t_{k-1})\]</span></p>
+<p>Let’s define <span class="math inline">\(\Delta t = t_k - t_{k-1}\)</span> and <span class="math inline">\(\alpha = \frac{\tau}{\Delta t}\)</span> With a bit more algebra, we find that:</p>
+<p><span class="math display">\[y(t_k) = \frac{\alpha - 1}{\alpha} y(t_{k-1}) + \frac{K}{\alpha} u(t_{k-1})\]</span></p>
+<p>One more simplification: <span class="math inline">\(\beta = \alpha^{-1}\)</span>:</p>
+<p><span class="math display">\[y(t_k) = (1-\beta) y(t_{k-1}) + K \beta u(t_{k-1})\]</span></p>
+<p>Discretization makes it much easier to use computational tools like MATLAB and Python to manipulate a signal without preexisting toolboxes.</p>
+<p></p>
+</section>
+<section id="impulse-response" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="impulse-response"><span class="header-section-number">5.7</span> Impulse Response</h2>
+<p>Now that we’ve developed all this new technology, let’s draw some conclusions.</p>
+<p>First, let’s circle back to our discussion of the unit impulse. We define the <strong>impulse response</strong> <span class="math inline">\(h(t)\)</span> as a function that describes the behavior of an LTI system when it’s stimulated with a unit impulse. The impulse response is the output of the system resulting from this very short, narrow input signal.</p>
+<p>Say we smack a damped mass-spring system with an impact hammer, exciting the mass with a force we’ll model as the unit impulse <span class="math inline">\(\delta(t)\)</span>.</p>
+<p>The equation of motion of this system is:</p>
+<p><span class="math display">\[m\ddot{x} + b \dot{x} + kx = \delta(t) \qquad \qquad \text{or} \qquad \qquad \ddot{x} + 2\zeta \omega_n \dot{x} + \omega_n^2 x = \frac{1}{m} \delta(t)\]</span></p>
+<p>That’s extremely daunting to solve, but we’ll use a nifty trick. We separate the equation of motion into two…“stages” - during the hammer thwack and after the hammer thwack. Assume the mass is at rest before we whack it.</p>
+<p>For the hammer thwack itself, we integrate the equation of motion twice successively from <span class="math inline">\(0\)</span> to time <span class="math inline">\(t\)</span>, where <span class="math inline">\(t\)</span> is immediately after the smack:</p>
+<p><span class="math display">\[\int_{0^-}^t \left(m \ddot{x} + b \dot{x} + kx = \delta(\tau) \right) \, d\tau\]</span> <span class="math display">\[m \dot{x} + bx + \int_{0^-}^t kx \, d\tau = 1 \qquad \qquad \longleftrightarrow \qquad \qquad m \dot{x} = 1 - bx - \int_{0^-}^t kx \, d\tau\]</span></p>
+<p><span class="math display">\[\int_{0^-}^t \left(\int_{0^-}^t \left(m \ddot{x} + b \dot{x} + kx = \delta(\tau) \right) \, d\tau \right) \,d\tau\]</span></p>
+<p><span class="math display">\[m x + \int_{0^-}^t bx \, d\tau + \int_{0^-}^t 1 - \left(\int_{0^-}^t kx \, d\tau \right) \, d\tau = 0 \qquad \qquad \longleftrightarrow \qquad \qquad m x = \int_{0^-}^t 1 - bx - \left(\int_{0^-}^t kx \, d\tau \right) \, d\tau\]</span></p>
+<p>Evaluating these integrals at <span class="math inline">\(t=0^+\)</span> yields the following two “initial conditions”: <span class="math display">\[x(0^+) = 0 \qquad \qquad \dot{x}(0^+) = \frac{1}{m}\]</span></p>
+<p>Since after the hammer crack there is no force exciting the system, solving the homogeneous version of the equation of motion with these initial conditions will yield the impulse response.</p>
+<p><span class="math display">\[m\ddot{x} + b\dot{x} + kx = 0 , \; x(0^+) = 0 , \;\dot{x}(0^+) = \frac{1}{m}\]</span> <span class="math display">\[x(t) = \frac{1}{m \omega_d} e^{-\zeta \omega_n t} \sin(\omega_d t) = h(t)\]</span></p>
+<p>You’ll get much more familiar with the concept of mechanical impulse in ME301.</p>
+<p>We can calculate the response of a system to an arbitrary force of varying magnitude using the impulse response. To calculate the response of a structure to an external force, we use the concept of superposition, which involves breaking down the force into small parts and adding up the response to each part to get the response.</p>
+<p>For example, if we have a force that varies over time, we can divide it into small time intervals of length <span class="math inline">\(\Delta t\)</span>, and at each interval <span class="math inline">\(t_k\)</span>, we can calculate the response of the system to an impulse of force <span class="math inline">\(\Delta F_k = F(t_k)\Delta t\)</span>.</p>
+<p>To do this, we use the impulse response function <span class="math inline">\(h(t)\)</span>, which represents the response of the system to a unit impulse of force applied at time <span class="math inline">\(t=0\)</span>. Then, the response of the system to the impulse of force <span class="math inline">\(\Delta F_k\)</span> applied at time <span class="math inline">\(t_k\)</span> is given by <span class="math inline">\(h(t-t_k)\Delta F_k\)</span>, where <span class="math inline">\(h(t-t_k)\)</span> is the impulse response function shifted in time by <span class="math inline">\(t_k\)</span>.</p>
+<p>Thus, the response of the system to the external force <span class="math inline">\(F(t)\)</span> is given by the sum of the responses to all the impulses:</p>
+<p><span class="math display">\[y(t) = \sum_{k=1}^n \Delta F_k h(t-t_k) = \sum_{k=1}^n  F(t_k) h(t-t_k)\Delta t\]</span></p>
+<p>By using smaller and smaller time intervals <span class="math inline">\(\Delta t\)</span>, we can make this sum approach an integral:</p>
+<p><span class="math display">\[y(t) = \int_0^t  F(\tau) h(t-\tau) \, d\tau\]</span></p>
+<p>which you may recognize as the convolution integral. While we used a mechanical framework to develop intuition for this concept, we can generalize further by saying that <strong>if you have the impulse response <span class="math inline">\(h(t)\)</span> of the system, you can determine the response to an arbitrary input <span class="math inline">\(u(t)\)</span></strong> as follows:</p>
+<p><span class="math display">\[y(t) = \int_0^t u(\tau) h(t-\tau) \, d\tau\]</span></p>
+<p>Let’s close out with one more thought. What if we have an input signal <span class="math inline">\(U(s) = 1\)</span>? Then the output signal is just equal to the transfer function <span class="math inline">\(H(s)\)</span>. Thus, it’s valid to say that <strong>the impulse response of a system is equivalent to the inverse Laplace transform of the transfer function</strong>.<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a></p>
+<p>We’ve established that we have two main representations of a linear system: the state-space representation and a transfer function. What if we want to convert between them?</p>
+<p>Well, it’s pretty easy in Python/MATLAB - just use a command. What’s</p>
+<p>It’s possible to come up with infinitely many state-space representations of a system, but the transfer function of a system is unique.</p>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>The state space can be described as a Euclidean space where each state corresponds with an axis.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Alternatively, you could sum forces in the parallel and perpendicular directions of motion to yield an equivalent result.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>You could try to put the two tanks problem from HW1 in state-space form for extra practice.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Figure from Zill, et al.&nbsp;(8)<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Not to be confused with the Kronecker delta!<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>The less dismissive answer is that the unit impulse function is an example of something we call a generalized function. Go take a functional analysis course if you want to pursue this further.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>The two-sided Laplace transform instead has integral limits of <span class="math inline">\(-\infty\)</span> and <span class="math inline">\(\infty\)</span>, but for causal signal inputs, the one-sided Laplace transform is equivalent. (A causal signal is a signal that is 0 for all <span class="math inline">\(t&lt;0\)</span>.)<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>A function <span class="math inline">\(f(t)\)</span> is said to be of exponential order if there exist positive constants <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> such that <span class="math inline">\(|f(t)| \le ae^{bt}\)</span> for all <span class="math inline">\(t\ge 0\)</span>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>It might seem peculiar that I’m abstaining from providing a formula to directly calculate the inverse Laplace transform. You can look up Mellin’s inverse formula for additional hardship, but rest assured that it’s WAY more convenient to think of the inverse Laplace transform as just that - an inverse Laplace transform, instead of as its own distinct transform.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>Man, I said I was going to do this less formally!<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>If you’re not that comfortable with partial fraction decomposition, it might be a good idea to look up the Heaviside cover-up method. Thank me later.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p>I’m too lazy to take the inverse Laplace transform of this. It’s not difficult though, knock yourself out.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p>In the electrical networks world, we can translate operational amplifiers (op amps) into impedances as well. Absolutely terrifying.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn14"><p>This might be more apparent if you think about this outside the Laplace domain, where <span class="math inline">\(y(t) = \delta(t)\)</span>.<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./ch4.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">An Engineering Student’s Butchering of Ma326</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./ch6.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Frequency Response</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
