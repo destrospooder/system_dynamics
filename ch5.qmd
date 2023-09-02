@@ -24,7 +24,7 @@ In the most general case, a state-state representation can be represented as the
     \left\{ \begin{array}{ll}
         \underline{\dot{x}} = \underline{f}(\underline{x}, \underline{u}) \\
         \underline{y} = \underline{h}(\underline{x}, \underline{u})
-    \end{array} \right.
+    \end{array} \right\.
 \end{equation*}
 
 This might be a bit daunting at first, but it's just a lot of fancy notation for a concept that's pretty simple. $\underline{x}$ is the state, $\underline{u}$ is an input, and $\underline{y}$ is an output. Let's drive this concept home with an example.
@@ -441,7 +441,7 @@ which is left to complete as an exercise to the reader.^[I'm too lazy to take th
 
 
 
-Ah, one more thing! The roots of the numerator of the transfer function are called the $zeroes$ of the system, and the roots of the denominator of the transfer function are called the $poles$. These definitions are consistent with the definitions we established earlier in the course.
+Ah, one more thing! The roots of the numerator of the transfer function are called the **zeroes** of the system, and the roots of the denominator of the transfer function are called the **poles**. These definitions are consistent with the definitions we established earlier in the course.
 
 
 

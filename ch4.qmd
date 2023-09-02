@@ -1,24 +1,16 @@
-# An Engineering Student's Butchering of Ma326
+# Linear Algebra for Absolute Bozos
 
 ## Preface {-}
 
-This chapter's going to be a smorgasbord of mathematical concepts I think are foundational to understanding this course from a theoretical perspective. A decent chunk of it will be review from Ma110 and Ma240, but it doesn't hurt to take a second look at these things (they keep coming back over and over). That being said, this chapter largely strays off from Prof. Luchtenburg's curriculum, especially in the latter half of section 4.3.
-
-
+This chapter's going to be a smorgasbord of mathematical concepts I think are foundational to understanding this course from a theoretical perspective. A decent chunk of it will be review from Ma110 and Ma240, but it doesn't hurt to take a second look at these things (they keep coming back over and over). That being said, this chapter is skippable for those confident in their abilities.
 
 What I'll try to do, instead of rehashing what you got out of Ma240, is reframe these concepts in a way that's more applicable to this course (and ME351). I'll also formalize a bunch of concepts from Ma326 that are really important to know for this class (and later on). But first, let's formalize a few more definitions that will come in handy later on.
 
-
-
-
 A **linear combination** of elements of a set $x_1, x_2, ..., x_n$, is given by:
-
 
 $$a_1 x_1 + a_2 x_2 + ... + a_n x_n $$
 
 where each $a_i$ is a constant. In layman's terms, a linear combination of variables is the sum of scaled versions of those variables, where the scaling factor is a scalar.
-
-
 
 A set of variables are **linearly dependent** if one of the variables can be expressed as a linear combination of the others. More formally, a set of variables $x_1, x_2, ..., x_n$ is linearly dependent if there exist scalars $a_1, a_2, ... a_n$ (not all zero), such that:
 
@@ -29,17 +21,19 @@ On the other hand, if no such scalars exist, the set of variables is said to be 
 
 ## Linearity and Time-Invariance
 
-A \textbf{linear time-invariant (LTI) system} is a mathematical model often used in control theory to describe the behavior of physical systems. It is characterized by two properties: linearity and time-invariance. I'll describe these separately in the context of differential equations. A differential equation of the form:
+![](figs/4_meme.png){width=55% fig-align="center"}
+
+A **linear time-invariant (LTI) system** is a mathematical model often used in control theory to describe the behavior of physical systems. It is characterized by two properties: linearity and time-invariance. I'll describe these separately in the context of differential equations. A differential equation of the form:
 
 
 $$a_n y^{(n)} (t) + a_{n-1} y^{(n-1)} + ... + a_1 \dot{y}(t) + a_0 y(t) = f(t)$$
 
-where $y^{(i)}$ is the $i$th derivative of $y(t)$, is called \textbf{linear}. (The relationship between $y(t)$ and $t$ is a linear mapping.) A system is linear if and only if it satisfies two properties: superposition and homogeneity:
+where $y^{(i)}$ is the $i$th derivative of $y(t)$, is called **linear**. (The relationship between $y(t)$ and $t$ is a linear mapping.) A system is linear if and only if it satisfies two properties: superposition and homogeneity:
 
 * **Superposition** - if $x_1 \to y_1$ and $x_2 \to y_2$, then $x_1 + x_2 \to y_1 + y_2$
 * **Homogeneity** - if $k$ is a scalar and $x \to y$, then $kx \to ky$
 
-If $\{a_i\}_0^n$, also called coefficients, are constants, the equation is also characterized as a \textbf{constant coefficient} differential equation. Physically, constant coefficients imply that the system behavior does not depend on time. 
+If $\{a_i\}_0^n$, also called coefficients, are constants, the equation is also characterized as a constant coefficient differential equation. Physically, constant coefficients imply that the system behavior does not depend on time. 
 
 
 
@@ -104,7 +98,7 @@ $$ k \begin{bmatrix}
     ka & kb \\ kc & kd
 \end{bmatrix}$$
 
-The **zero matrix** **0** is an $m\times n$ matrix with all entries 0. The zero matrix plays an important role in linear algebra, as it is the additive identity for matrices. This means that adding a zero matrix to any matrix does not change the matrix, much like adding zero to any number does not change its value.
+The **zero matrix** $\textbf{0}$ is an $m\times n$ matrix with all entries 0. The zero matrix plays an important role in linear algebra, as it is the additive identity for matrices. This means that adding a zero matrix to any matrix does not change the matrix, much like adding zero to any number does not change its value.
 
 
 
@@ -222,3 +216,46 @@ $$\boldsymbol{x} \times \boldsymbol{y} = \text{skew}(\boldsymbol{x}) \boldsymbol
 Prove it! It's kind of fun.
 
 ## Invert It! Determine...It!
+
+An $n \times n$ matrix $\textbf{A}$ is called **invertible** if there exists a inverse $\textbf{B}$ such that:
+
+$$ \textbf{A}\textbf{B} = \textbf{B}\textbf{A} = \textbf{I}_n $$
+
+There are many algorithms for finding the inverse of a matrix; the list is too exhaustive to describe in detail here, so I'll just drop the Wikipedia link [here](https://en.wikipedia.org/wiki/Invertible_matrix#Methods_of_matrix_inversion) and encourage you to explore on your own.
+
+I'm going to dump some properties here, where $\textbf{X}$ and $\left\{ \textbf{A}_i \right\} _{i=1}^k$ are invertible $n\times n$ matrices:
+
+* $\left(\textbf{X}^\text{-1}\right)^\text{-1} = \textbf{X}$
+* $\left(\textbf{X}^\text{T}\right)^\text{-1} = \left(\textbf{X}^\text{-1}\right)^\text{T}$
+* $(\textbf{A}_1 \textbf{A}_2)^{-1} = \textbf{A}_2^{-1} \textbf{A}_1 ^{-1}$
+* $(\textbf{A}_1 \textbf{A}_2 \cdots \textbf{A}_{k-1} \textbf{A}_k )^{-1} = \textbf{A}_k^{-1} \textbf{A}_{k-1} ^{-1} \cdots \textbf{A}_2^{-1} \textbf{A}_{1} ^{-1}$
+
+But how can you tell *if* a matrix is invertible? We use a value called the **determinant** to help there.
+
+When we have a matrix of size $n \times n$, its determinant tells us whether the matrix is invertible or not. If the determinant of a square matrix is non-zero, it means the matrix is invertible. In other words, it has an inverse matrix that can be found. On the other hand, if the determinant is zero, the matrix is not invertible, and it is called a **singular** matrix.
+
+Finding the determinant of a matrix is an...annoying process to say the least if the matrix is of size larger than $2\times 2$ - you'll have to use the method cofactor expansion or Laplace expansion for that, and...bleugh. For $2 \times 2$, though?
+
+$$\text{det} \begin{bmatrix} a & b \\ c & d \end{bmatrix}  = ad-bc$$
+
+Calculating the inverse and determinant by hand for matrices larger than size $2 \times 2$ shouldn't be necessary in this course - that's why we have tools like MATLAB and Python to help out.
+
+While I did just get lazy and drop a Wikipedia link before, there is one method of finding the inverse of a matrix that I do want to highlight. It involves the **classical adjoint**, or **adjucate** of a matrix, a matrix that satisfies the following property:
+
+$$ \textbf{A} \, \text{adj}(\textbf{A}) = \det(\textbf{A}) \, \textbf{I} $$
+
+The classical adjoint of a $2\times 2$ matrix $\textbf{A}$ is:
+
+$$\text{adj} \begin{bmatrix} a & b \\ c & d \end{bmatrix}  = \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$$
+
+and using the property that defines the classical adjoint, we can derive the following formula for the inverse of a matrix $\textbf{A}$:
+
+$$\textbf{A}^{-1} = \frac{\text{adj} \, \textbf{A}}{\text{det} \, \textbf{A}}$$
+
+This formula's still valid for matrices of size $n \times n$, but I find it useful when we're dealing with $2 \times 2$ matrices. Note that when a matrix $\textbf{A}$ has a determinant of 0, the formula correctly lets you know that $\textbf{A}^{-1}$ is undefined.
+
+As I've done seemingly countless times now, here's another property dump, where $k$ is a scalar, $\textbf{A}$ is an $n \times n$ matrix and $\textbf{B}$ is an $n \times n$ invertible matrix:
+
+* $\det{(k \textbf{A})} = k^n \det{(\textbf{A})}$
+* $\det{(\textbf{A}^{\text{T}})} = \det{(\textbf{A})}$
+* $\det{(\textbf{B}^{-1})} = \det{(\textbf{B})}^{-1}$

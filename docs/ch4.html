@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>System Dynamics - 4&nbsp; An Engineering Student’s Butchering of Ma326</title>
+<title>System Dynamics - 4&nbsp; Linear Algebra for Absolute Bozos</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -77,7 +77,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch4.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">An Engineering Student's Butchering of Ma326</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch4.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Linear Algebra for Absolute Bozos</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -132,7 +132,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch4.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">An Engineering Student’s Butchering of Ma326</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Linear Algebra for Absolute Bozos</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -182,7 +182,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">An Engineering Student’s Butchering of Ma326</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Linear Algebra for Absolute Bozos</span></h1>
 </div>
 
 
@@ -199,7 +199,7 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="preface" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="preface">Preface</h2>
-<p>This chapter’s going to be a smorgasbord of mathematical concepts I think are foundational to understanding this course from a theoretical perspective. A decent chunk of it will be review from Ma110 and Ma240, but it doesn’t hurt to take a second look at these things (they keep coming back over and over). That being said, this chapter largely strays off from Prof.&nbsp;Luchtenburg’s curriculum, especially in the latter half of section 4.3.</p>
+<p>This chapter’s going to be a smorgasbord of mathematical concepts I think are foundational to understanding this course from a theoretical perspective. A decent chunk of it will be review from Ma110 and Ma240, but it doesn’t hurt to take a second look at these things (they keep coming back over and over). That being said, this chapter is skippable for those confident in their abilities.</p>
 <p>What I’ll try to do, instead of rehashing what you got out of Ma240, is reframe these concepts in a way that’s more applicable to this course (and ME351). I’ll also formalize a bunch of concepts from Ma326 that are really important to know for this class (and later on). But first, let’s formalize a few more definitions that will come in handy later on.</p>
 <p>A <strong>linear combination</strong> of elements of a set <span class="math inline">\(x_1, x_2, ..., x_n\)</span>, is given by:</p>
 <p><span class="math display">\[a_1 x_1 + a_2 x_2 + ... + a_n x_n \]</span></p>
@@ -210,14 +210,19 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="linearity-and-time-invariance" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="linearity-and-time-invariance"><span class="header-section-number">4.1</span> Linearity and Time-Invariance</h2>
-<p>A is a mathematical model often used in control theory to describe the behavior of physical systems. It is characterized by two properties: linearity and time-invariance. I’ll describe these separately in the context of differential equations. A differential equation of the form:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figs/4_meme.png" class="img-fluid figure-img" style="width:55.0%"></p>
+</figure>
+</div>
+<p>A <strong>linear time-invariant (LTI) system</strong> is a mathematical model often used in control theory to describe the behavior of physical systems. It is characterized by two properties: linearity and time-invariance. I’ll describe these separately in the context of differential equations. A differential equation of the form:</p>
 <p><span class="math display">\[a_n y^{(n)} (t) + a_{n-1} y^{(n-1)} + ... + a_1 \dot{y}(t) + a_0 y(t) = f(t)\]</span></p>
-<p>where <span class="math inline">\(y^{(i)}\)</span> is the <span class="math inline">\(i\)</span>th derivative of <span class="math inline">\(y(t)\)</span>, is called . (The relationship between <span class="math inline">\(y(t)\)</span> and <span class="math inline">\(t\)</span> is a linear mapping.) A system is linear if and only if it satisfies two properties: superposition and homogeneity:</p>
+<p>where <span class="math inline">\(y^{(i)}\)</span> is the <span class="math inline">\(i\)</span>th derivative of <span class="math inline">\(y(t)\)</span>, is called <strong>linear</strong>. (The relationship between <span class="math inline">\(y(t)\)</span> and <span class="math inline">\(t\)</span> is a linear mapping.) A system is linear if and only if it satisfies two properties: superposition and homogeneity:</p>
 <ul>
 <li><strong>Superposition</strong> - if <span class="math inline">\(x_1 \to y_1\)</span> and <span class="math inline">\(x_2 \to y_2\)</span>, then <span class="math inline">\(x_1 + x_2 \to y_1 + y_2\)</span></li>
 <li><strong>Homogeneity</strong> - if <span class="math inline">\(k\)</span> is a scalar and <span class="math inline">\(x \to y\)</span>, then <span class="math inline">\(kx \to ky\)</span></li>
 </ul>
-<p>If <span class="math inline">\(\{a_i\}_0^n\)</span>, also called coefficients, are constants, the equation is also characterized as a differential equation. Physically, constant coefficients imply that the system behavior does not depend on time.</p>
+<p>If <span class="math inline">\(\{a_i\}_0^n\)</span>, also called coefficients, are constants, the equation is also characterized as a constant coefficient differential equation. Physically, constant coefficients imply that the system behavior does not depend on time.</p>
 <p>We can establish an equivalence between linear constant coefficient equations and linear time-invariant systems. Time-invariance is the principle that if we chug an input <span class="math inline">\(t_0\)</span> into a system that outputs <span class="math inline">\(y(t_0)\)</span>, the input <span class="math inline">\(t_0 + t_1\)</span> will result in an output of <span class="math inline">\(y(t_0 + t_1)\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p>Let’s take a look at a few examples to make this more clear:</p>
 <p><span class="math display">\[\dot{y} + \sin(t) y = 0\]</span></p>
@@ -253,7 +258,7 @@ ul.task-list li input[type="checkbox"] {
 \end{bmatrix} = \begin{bmatrix}
     ka &amp; kb \\ kc &amp; kd
 \end{bmatrix}\]</span></p>
-<p>The <strong>zero matrix</strong> <strong>0</strong> is an <span class="math inline">\(m\times n\)</span> matrix with all entries 0. The zero matrix plays an important role in linear algebra, as it is the additive identity for matrices. This means that adding a zero matrix to any matrix does not change the matrix, much like adding zero to any number does not change its value.</p>
+<p>The <strong>zero matrix</strong> <span class="math inline">\(\textbf{0}\)</span> is an <span class="math inline">\(m\times n\)</span> matrix with all entries 0. The zero matrix plays an important role in linear algebra, as it is the additive identity for matrices. This means that adding a zero matrix to any matrix does not change the matrix, much like adding zero to any number does not change its value.</p>
 <p>A <strong>square matrix</strong> is a matrix with the same number of rows and columns. Many concepts in linear algebra are designed with these in mind, such as determinants and eigenvalues.</p>
 <p>Next, we’ll tackle the <strong>Kronecker delta</strong>, which is is a useful and important symbol in mathematics, particularly in linear algebra and related fields. Its simple definition allows for the easy expression of many concepts and operations, making it a valuable tool for mathematicians and scientists. We define the Kronecker delta <span class="math inline">\(\delta_{ij}\)</span> as follows:</p>
 <p><span class="math display">\[\begin{equation*}
@@ -330,6 +335,34 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="invert-it-determineit" class="level2" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="invert-it-determineit"><span class="header-section-number">4.4</span> Invert It! Determine…It!</h2>
+<p>An <span class="math inline">\(n \times n\)</span> matrix <span class="math inline">\(\textbf{A}\)</span> is called <strong>invertible</strong> if there exists a inverse <span class="math inline">\(\textbf{B}\)</span> such that:</p>
+<p><span class="math display">\[ \textbf{A}\textbf{B} = \textbf{B}\textbf{A} = \textbf{I}_n \]</span></p>
+<p>There are many algorithms for finding the inverse of a matrix; the list is too exhaustive to describe in detail here, so I’ll just drop the Wikipedia link <a href="https://en.wikipedia.org/wiki/Invertible_matrix#Methods_of_matrix_inversion">here</a> and encourage you to explore on your own.</p>
+<p>I’m going to dump some properties here, where <span class="math inline">\(\textbf{X}\)</span> and <span class="math inline">\(\left\{ \textbf{A}_i \right\} _{i=1}^k\)</span> are invertible <span class="math inline">\(n\times n\)</span> matrices:</p>
+<ul>
+<li><span class="math inline">\(\left(\textbf{X}^\text{-1}\right)^\text{-1} = \textbf{X}\)</span></li>
+<li><span class="math inline">\(\left(\textbf{X}^\text{T}\right)^\text{-1} = \left(\textbf{X}^\text{-1}\right)^\text{T}\)</span></li>
+<li><span class="math inline">\((\textbf{A}_1 \textbf{A}_2)^{-1} = \textbf{A}_2^{-1} \textbf{A}_1 ^{-1}\)</span></li>
+<li><span class="math inline">\((\textbf{A}_1 \textbf{A}_2 \cdots \textbf{A}_{k-1} \textbf{A}_k )^{-1} = \textbf{A}_k^{-1} \textbf{A}_{k-1} ^{-1} \cdots \textbf{A}_2^{-1} \textbf{A}_{1} ^{-1}\)</span></li>
+</ul>
+<p>But how can you tell <em>if</em> a matrix is invertible? We use a value called the <strong>determinant</strong> to help there.</p>
+<p>When we have a matrix of size <span class="math inline">\(n \times n\)</span>, its determinant tells us whether the matrix is invertible or not. If the determinant of a square matrix is non-zero, it means the matrix is invertible. In other words, it has an inverse matrix that can be found. On the other hand, if the determinant is zero, the matrix is not invertible, and it is called a <strong>singular</strong> matrix.</p>
+<p>Finding the determinant of a matrix is an…annoying process to say the least if the matrix is of size larger than <span class="math inline">\(2\times 2\)</span> - you’ll have to use the method cofactor expansion or Laplace expansion for that, and…bleugh. For <span class="math inline">\(2 \times 2\)</span>, though?</p>
+<p><span class="math display">\[\text{det} \begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}  = ad-bc\]</span></p>
+<p>Calculating the inverse and determinant by hand for matrices larger than size <span class="math inline">\(2 \times 2\)</span> shouldn’t be necessary in this course - that’s why we have tools like MATLAB and Python to help out.</p>
+<p>While I did just get lazy and drop a Wikipedia link before, there is one method of finding the inverse of a matrix that I do want to highlight. It involves the <strong>classical adjoint</strong>, or <strong>adjucate</strong> of a matrix, a matrix that satisfies the following property:</p>
+<p><span class="math display">\[ \textbf{A} \, \text{adj}(\textbf{A}) = \det(\textbf{A}) \, \textbf{I} \]</span></p>
+<p>The classical adjoint of a <span class="math inline">\(2\times 2\)</span> matrix <span class="math inline">\(\textbf{A}\)</span> is:</p>
+<p><span class="math display">\[\text{adj} \begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}  = \begin{bmatrix} d &amp; -b \\ -c &amp; a \end{bmatrix}\]</span></p>
+<p>and using the property that defines the classical adjoint, we can derive the following formula for the inverse of a matrix <span class="math inline">\(\textbf{A}\)</span>:</p>
+<p><span class="math display">\[\textbf{A}^{-1} = \frac{\text{adj} \, \textbf{A}}{\text{det} \, \textbf{A}}\]</span></p>
+<p>This formula’s still valid for matrices of size <span class="math inline">\(n \times n\)</span>, but I find it useful when we’re dealing with <span class="math inline">\(2 \times 2\)</span> matrices. Note that when a matrix <span class="math inline">\(\textbf{A}\)</span> has a determinant of 0, the formula correctly lets you know that <span class="math inline">\(\textbf{A}^{-1}\)</span> is undefined.</p>
+<p>As I’ve done seemingly countless times now, here’s another property dump, where <span class="math inline">\(k\)</span> is a scalar, <span class="math inline">\(\textbf{A}\)</span> is an <span class="math inline">\(n \times n\)</span> matrix and <span class="math inline">\(\textbf{B}\)</span> is an <span class="math inline">\(n \times n\)</span> invertible matrix:</p>
+<ul>
+<li><span class="math inline">\(\det{(k \textbf{A})} = k^n \det{(\textbf{A})}\)</span></li>
+<li><span class="math inline">\(\det{(\textbf{A}^{\text{T}})} = \det{(\textbf{A})}\)</span></li>
+<li><span class="math inline">\(\det{(\textbf{B}^{-1})} = \det{(\textbf{B})}^{-1}\)</span></li>
+</ul>
 
 
 </section>

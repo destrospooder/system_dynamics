@@ -10,7 +10,7 @@ More broadly, the frequency response describes how a system responds to differen
 
 ## That Hertz!
 
-So what exactly makes sinusoidal inputs so interesting? 
+So what exactly makes sinusoidal inputs so interesting?  
 
 
 

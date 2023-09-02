@@ -132,7 +132,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">An Engineering Student’s Butchering of Ma326</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Linear Algebra for Absolute Bozos</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -216,7 +216,7 @@ ul.task-list li input[type="checkbox"] {
     \left\{ \begin{array}{ll}
         \underline{\dot{x}} = \underline{f}(\underline{x}, \underline{u}) \\
         \underline{y} = \underline{h}(\underline{x}, \underline{u})
-    \end{array} \right.
+    \end{array} \right\.
 \end{equation*}\]</span></p>
 <p>This might be a bit daunting at first, but it’s just a lot of fancy notation for a concept that’s pretty simple. <span class="math inline">\(\underline{x}\)</span> is the state, <span class="math inline">\(\underline{u}\)</span> is an input, and <span class="math inline">\(\underline{y}\)</span> is an output. Let’s drive this concept home with an example.</p>
 <p>Say we have a simple pendulum with length <span class="math inline">\(L\)</span> and a point mass <span class="math inline">\(m\)</span> at its end, as pictured below:</p>
@@ -464,7 +464,7 @@ ul.task-list li input[type="checkbox"] {
 <p>In this scenario, <span class="math inline">\(U\)</span> is the Laplace transform of <span class="math inline">\(u_s(t)\)</span>, or <span class="math inline">\(\frac{1}{s}\)</span>.</p>
 <p><span class="math display">\[Y = \frac{1}{s^3 - 4s^2 + 3s}\]</span></p>
 <p>which is left to complete as an exercise to the reader.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a></p>
-<p>Ah, one more thing! The roots of the numerator of the transfer function are called the <span class="math inline">\(zeroes\)</span> of the system, and the roots of the denominator of the transfer function are called the <span class="math inline">\(poles\)</span>. These definitions are consistent with the definitions we established earlier in the course.</p>
+<p>Ah, one more thing! The roots of the numerator of the transfer function are called the <strong>zeroes</strong> of the system, and the roots of the denominator of the transfer function are called the <strong>poles</strong>. These definitions are consistent with the definitions we established earlier in the course.</p>
 <p>This seems like as good a time as any to introduce the concept of a <strong>block diagram</strong>, or a visual representation of a system, using blocks and arrows to break down components. We literally represent components as black boxes, without regard for whatever’s going on inside. All that matters is what comes in and what goes out. Seems perfect for a transfer function.</p>
 <p>Here’s a block diagram. <span class="math inline">\(U\)</span> is our input signal, <span class="math inline">\(Y\)</span> is the output signal, and <span class="math inline">\(H\)</span> is the transfer function representation of the system. When a signal enters a system in a block diagram, the output signal will be the product of the signal and the system’s transfer function.</p>
 <p>We can use additional tools of block diagram algebra to simplify and manipulate these diagrams, which ends up being vital when we start introducing feedback control into the mix.</p>
@@ -915,7 +915,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./ch4.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">An Engineering Student’s Butchering of Ma326</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Linear Algebra for Absolute Bozos</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
